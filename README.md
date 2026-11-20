@@ -51,4 +51,4 @@ Geen accounts, geen analytics, geen cookies van derden. Spelstatus alleen in `lo
 
 ## Deploy
 
-Statische site: `npm run build` → map `dist/` (bijv. Netlify).
+Statische site: `npm run build` → map `dist/` → **Cloudflare Pages** (GitHub-koppeling). Zie `docs/DEPLOY.md`.

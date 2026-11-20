@@ -15,7 +15,7 @@ if (!url) {
 }
 
 if (!url || url.includes('<site>')) {
-  console.error('Geef student-URL: npm run qr -- https://recept-xxxx.netlify.app/');
+  console.error('Geef student-URL: npm run qr -- https://<PROJECTNAAM>.pages.dev/');
   process.exit(1);
 }
 
