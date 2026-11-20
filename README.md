@@ -41,6 +41,12 @@ Geen accounts, geen analytics, geen cookies van derden. Spelstatus alleen in `lo
 
 **Demo-URL:** deel de studentlink alleen besloten (geen openbare posts). Zie `docs/DEPLOY.md` voor student- en docentlink.
 
+## Testen
+
+De online testversie staat achter **Cloudflare Access** met een **eenmalige pincode per e-mail** (One-time PIN). Je hebt een uitgenodigd adres nodig; open de site niet als openbare link.
+
+**Toegang aanvragen:** neem contact op met **Richard** — hij kan je e-mailadres aan het Access-beleid laten toevoegen. Daarna ontvang je bij het bezoeken van de testsite een code per mail.
+
 ## Documentatie
 
 - `CURSOR-PROMPT.md` — volledige specificatie
