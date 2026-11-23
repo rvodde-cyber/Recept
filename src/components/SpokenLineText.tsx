@@ -1,23 +1,21 @@
-/** Visuele aanhalingstekens; brontekst in data blijft zonder tekens. */
-export function lineHasInlineQuotes(text: string): boolean {
-  return /["'‘’“”„«»]/.test(text);
+/** Vervang recht apostrof in weergave (z'n, zo'n, 's); brontekst blijft ASCII. */
+export function normalizeSpokenApostrophe(text: string): string {
+  return text.replace(/'/g, '\u2019');
 }
 
 type Props = { text: string; quoted: boolean };
 
 export function SpokenLineText({ text, quoted }: Props) {
   if (!quoted) return <>{text}</>;
-  const single = lineHasInlineQuotes(text);
-  const open = single ? '‘' : '“';
-  const close = single ? '’' : '”';
+  const body = normalizeSpokenApostrophe(text);
   return (
     <>
       <span className="spoken-q" aria-hidden="true">
-        {open}
+        {"\u201C"}
       </span>
-      {text}
+      {body}
       <span className="spoken-q" aria-hidden="true">
-        {close}
+        {"\u201D"}
       </span>
     </>
   );

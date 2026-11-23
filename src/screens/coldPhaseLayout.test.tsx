@@ -12,6 +12,7 @@ import {
   SCENE_BRIEFING_TEMPO_MANUAL,
 } from '../game/coldOpenCopy';
 import { buildColdTimeline } from '@data/episodes/coldOpenTimeline';
+import { normalizeSpokenApostrophe } from '../components/SpokenLineText';
 
 function sceneState(episode: 1 | 2 | 3 | 4 | 5, round: 1 | 2): GameUiState {
   const base = freshEpisode(episode);
@@ -115,7 +116,9 @@ describe('openingsscène — indeling A1', () => {
     );
     expect(texts).toHaveLength(speechSteps.length);
     speechSteps.forEach((s, i) => {
-      expect(texts[i]).toContain(s.text);
+      const expected =
+        s.kind === 'speech' && s.speaker ? normalizeSpokenApostrophe(s.text) : s.text;
+      expect(texts[i]).toContain(expected);
     });
   });
 
