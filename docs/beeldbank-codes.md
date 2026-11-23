@@ -19,6 +19,7 @@ De volledige Firefly-prompts staan in het ontwerpdocument; Cursor heeft alleen d
 | Key art | K1 (familie in bestuurskamer) |
 | Titelkaarten | T1 schuur 1984, T2 lege hal 1996, T3 drie fabrieken 2009, T4 drone in assemblagehal 2026, T5 glazen hoofdkantoor 2036 |
 | Cold opens (familiescène) | C1 keukentafel 1984, C2 verjaardag 1996, C3 aankondiging 2009, C4 71e verjaardag Harrie 2026, C5 na de begrafenis 2036 |
+| Vergadertafel openingsscène | **VK1** keuken A1 r1, **VK1-2** schuur A1 r2, **VK2-1** band A2 r1, **VK2** kantine A2 r2, **VK3** A3 beide rondes, **VK4-1** villa A4 r1, **VK4-2** hal 3 A4 r2, **VK5-1** glas ingang A5 r1, **VK5** vergader A5 r2 — oud **VK4** MT niet meer in UI (`public/beelden/<code>.jpg`, 3:2, 1800×1200) |
 | Werkvloer | W1 met de hand 1984, W2 de band 1996, W3 de controle 2009, W4 de nachtploeg 2026, W5 het kantoor 2036 |
 | Portretten (legacy 4:5) | P1–P18 (zie mapping in `docs/PORTRETTEN-LIJST.md` § Legacy) |
 | Portretten (vierkant, UI) | **`P-<NAAM>-<JAAR>`** bijv. `P-HARRIE-1984` → `public/beelden/portretten/P-HARRIE-1984.webp` (of `.jpg`); 800×800, max 150 kB — volledige lijst: `docs/PORTRETTEN-LIJST.md` |

@@ -3,6 +3,7 @@ import {
   COLD_OPENING_KOP,
   SCENE_BRIEFING_BODY,
   SCENE_BRIEFING_FOLLOW,
+  SCENE_BRIEFING_TEMPO_AUTO,
   SCENE_BRIEFING_TIMER_HINT,
 } from '../../src/game/coldOpenCopy';
 import { EPISODES } from '@data/episodes/meta';
@@ -14,6 +15,7 @@ describe('openingsscène briefing', () => {
     expect(SCENE_BRIEFING_BODY).toContain('onder tafel');
     expect(SCENE_BRIEFING_FOLLOW).toContain('twee interventies');
     expect(SCENE_BRIEFING_TIMER_HINT).toContain('op de knop drukken');
+    expect(SCENE_BRIEFING_TEMPO_AUTO).toContain('Pauzeer de automatische weergave');
     expect(EPISODES).toHaveLength(5);
   });
 });

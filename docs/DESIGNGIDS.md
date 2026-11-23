@@ -194,7 +194,21 @@ Status `playMode` uit `data/episodes/meta.ts`. „Full” = zelfde diepte als A4
 - **Laag venster (≥900 px breed, ≤599 px hoog):** sticky uit; beeld **`max-height: min(50dvh - extra, viewport-cap - extra)`** per kader.
 - **Tablet 600–899 px / telefoon &lt;600 px:** beeld boven; frames gebruiken **`--intro-tablet-cap`** / **`--intro-phone-cap`** (= **min(55dvh, 560px of 520px, viewport-cap)`)** min extra; telefoon **4/5**, tablet **4/3** — shell zonder max-height.
 - **Schaduw in kader:** polaroid **geen** onderste vignet; kettingpapier/venster/glas **`.intro-beeld__shade--soft`**: max **20%** beeldhoogte, gradient-opaciteit **0,25**.
-- **Cold open / A4 `.cine`:** ongewijzigd (geen `#intro-split-scroll`).
+- **Cold open / A4 `.cine`:** trailer- en briefingfase ongewijzigd filmisch; actieve scène zie §10b.
+
+## 10b. Openingsscène — indeling (nov 2026)
+
+### Van boven naar beneden
+
+1. **`VergaderBeeld`** — code `vergaderBeeld.ronde1|ronde2` uit `EPISODE_CONTENT` (VK1–VK5), bestand `public/beelden/<code>.jpg` (3:2, 1800×1200). Volle kolombreedte (max 1100 px), max-hoogte 42vh (≤600 px: 30vh), `object-fit: cover`, rand `var(--line)`, tint = `introLook.tint`, onderrand-verloop. Ontbreekt het JPG: **BEELD &lt;code&gt; VOLGT**. Onderschrift: locatie uit cold-open `place` + jaartal.
+2. **Hardop** (`aria-label="Hardop gesproken"`) — gecentreerd, max 60ch: alle timeline-stappen `speech` (titel = lege spreker, cursief; hardop = sprekerlabel + serif met aanhalingstekens). Regels blijven staan tot einde scène.
+3. **Onder tafel** (`aria-label="Onder tafel"`) — alleen bij `onderstroomActief`; kop verschijnt met eerste bericht; brondvolgorde, bestaande `Onderstroom`-skins.
+
+### Bediening en briefing
+
+- **Tempo-uitleg** staat in `SceneBriefing` onder **Start de scène** (`SCENE_BRIEFING_TEMPO_AUTO` / `_MANUAL`), niet op de scènépagina.
+- Scène: compacte rij **Sneller · Pauze · Stop** (of **Verder · Stop** bij reduced motion); voortgangsdots; laatste regel nog taakzin over beslistijd; `HelpLinks`.
+- Trailer-, slot- en introscherm ongewijzigd.
 
 ### Playwright / handmatige check (repo heeft geen Playwright-devDependency)
 

@@ -11,6 +11,7 @@ import {
   COLD_OPENING_UITLEG,
   SCENE_BRIEFING_BODY,
   SCENE_BRIEFING_FOLLOW,
+  SCENE_BRIEFING_TEMPO_AUTO,
 } from '../game/coldOpenCopy';
 
 function briefingStateA1(): GameUiState {
@@ -110,6 +111,7 @@ describe('ColdPhase — scène-briefing (DOM A1 r1)', () => {
     expect(c.querySelector('.cold-scene')).toBeNull();
     expect(c.querySelector('.cold-open-uitleg')).toBeNull();
     expect(text()).not.toContain(COLD_OPENING_UITLEG);
+    expect(text()).toContain(SCENE_BRIEFING_TEMPO_AUTO);
     expect(c.querySelector('.filmbtns .btn.gold')).toBeNull();
     expect(latestState.timerOn).toBe(false);
     expect(latestState.rounds[1].sceneGestartOp).toBeNull();
@@ -123,5 +125,6 @@ describe('ColdPhase — scène-briefing (DOM A1 r1)', () => {
     expect(c.querySelector('.scene-briefing__start')).toBeNull();
     expect(c.querySelector('.filmbtns .btn.gold')).not.toBeNull();
     expect(text()).not.toContain(COLD_OPENING_UITLEG);
+    expect(text()).not.toContain(SCENE_BRIEFING_TEMPO_AUTO);
   });
 });

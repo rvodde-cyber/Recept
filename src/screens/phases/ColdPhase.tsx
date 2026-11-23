@@ -1,16 +1,21 @@
-import { useCallback, useEffect, useMemo, useState, type MouseEvent } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState, type MouseEvent } from 'react';
 import { COLD_SCENE, INTRO_SCENE } from '@data/sceneCodes';
 import { coldOpenTimelineForRound } from '@data/episodes/coldOpenFlow';
-import { episodeContent } from '@data/episodes/content';
+import { episodeContent, vergaderBeeldAltText, vergaderBeeldFileCode } from '@data/episodes/content';
 import { episodeMeta } from '@data/episodes/meta';
 import { usesBeslistijdTimer } from '@data/episodes/motor';
 import type { ColdTimelineStep } from '@data/episodes/coldOpenModel';
 import { SceneBackground } from '../../components/SceneBackground';
 import { HelpLinks } from '../../components/HelpLinks';
 import { Onderstroom, OnderstroomTyping } from '../../components/Onderstroom';
+import { VergaderBeeld } from '../../components/VergaderBeeld';
 import { useUiModals } from '../../context/UiModalsContext';
 import { unlockAudio } from '../../audio/sfx';
-import { speechStepAriaLabel } from '../../game/coldOpenA11y';
+import {
+  onderstroomAriaLabel,
+  speechStepAriaLabel,
+  typingAriaLabel,
+} from '../../game/coldOpenA11y';
 import {
   COLD_OPENING_KOP,
   coldSceneTaskLine,
@@ -23,6 +28,7 @@ import type { GameAction } from '../../game/gameReducer';
 import type { GameUiState } from '../../game/uiTypes';
 import { usePrefersReducedMotion } from '../../lib/prefersReducedMotion';
 import { SpokenLineText } from '../../components/SpokenLineText';
+import { PeriodThemeScope } from '../../components/PeriodThemeScope';
 
 function coldBackground(state: GameUiState, round: 1 | 2) {
   const content = episodeContent(state.episode);
@@ -38,15 +44,6 @@ function coldBackground(state: GameUiState, round: 1 | 2) {
   return <SceneBackground checkCode={sc.checkCode} fileCode={sc.fileCode} />;
 }
 
-function speechAtOrBefore(steps: readonly ColdTimelineStep[], index: number) {
-  for (let i = index; i >= 0; i--) {
-    const s = steps[i];
-    if (s?.kind === 'speech') return s;
-  }
-  const first = steps[0];
-  return first?.kind === 'speech' ? first : { kind: 'speech' as const, speaker: '', text: '' };
-}
-
 export function ColdPhase({
   state,
   dispatch,
@@ -60,6 +57,8 @@ export function ColdPhase({
   const [tabHidden, setTabHidden] = useState(
     typeof document !== 'undefined' ? document.hidden : false,
   );
+  const hardopEndRef = useRef<HTMLDivElement>(null);
+  const onderEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const onVis = () => setTabHidden(document.hidden);
@@ -93,7 +92,14 @@ export function ColdPhase({
   const last = roundUi.coldSub >= timeline.length - 1;
   const manualAdvance = reducedMotion;
 
-  const displaySpeech = step?.kind === 'speech' ? step : speechAtOrBefore(timeline, roundUi.coldSub);
+  const speechStack = useMemo(() => {
+    const out: Extract<ColdTimelineStep, { kind: 'speech' }>[] = [];
+    for (let i = 0; i <= roundUi.coldSub; i++) {
+      const s = timeline[i];
+      if (s?.kind === 'speech') out.push(s);
+    }
+    return out;
+  }, [timeline, roundUi.coldSub]);
 
   const onderstroomStack = useMemo(() => {
     const out: Extract<ColdTimelineStep, { kind: 'onderstroom' }>[] = [];
@@ -103,6 +109,21 @@ export function ColdPhase({
     }
     return out;
   }, [timeline, roundUi.coldSub]);
+
+  const onderstroomActive = content.onderstroomActief;
+  const showOnderTafel =
+    onderstroomActive &&
+    (onderstroomStack.length > 0 || step?.kind === 'onderstroom-typing');
+
+  const announceLabel = useMemo(() => {
+    if (!step) return '';
+    if (step.kind === 'speech') return speechStepAriaLabel(step);
+    if (step.kind === 'onderstroom') return onderstroomAriaLabel(step.line);
+    if (step.kind === 'onderstroom-typing') return typingAriaLabel(step.van);
+    return '';
+  }, [step]);
+
+  const sceneTaskLine = coldSceneTaskLine({ last, hasBeslistijdTimer: hasTimer, manualAdvance });
 
   const advanceLine = useCallback(() => {
     if (last) return;
@@ -135,6 +156,26 @@ export function ColdPhase({
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
   }, [roundUi.trailerDone, last, advanceLine]);
+
+  useEffect(() => {
+    if (!roundUi.trailerDone || reducedMotion) return;
+    const target =
+      step?.kind === 'onderstroom' || step?.kind === 'onderstroom-typing'
+        ? onderEndRef.current
+        : hardopEndRef.current;
+    if (!target) return;
+    const root = target.closest('.cold-scene-shell');
+    const scrollRoot = root instanceof HTMLElement ? root : null;
+    const visible =
+      !scrollRoot ||
+      (() => {
+        const er = target.getBoundingClientRect();
+        const sr = scrollRoot.getBoundingClientRect();
+        return er.bottom <= sr.bottom && er.top >= sr.top;
+      })();
+    if (visible) return;
+    target.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }, [roundUi.coldSub, roundUi.trailerDone, step, reducedMotion]);
 
   const onSceneSurfaceClick = (e: MouseEvent) => {
     if ((e.target as HTMLElement).closest('button, a, input')) return;
@@ -190,52 +231,90 @@ export function ColdPhase({
     paused: autoPaused,
     tabHidden,
   });
-
-  const speechAria = speechStepAriaLabel(displaySpeech);
+  const vkCode = vergaderBeeldFileCode(state.episode, round);
+  const vkAlt = vergaderBeeldAltText(state.episode, round);
+  const beeldCaption = `${sb.place}, ${meta.jaar}`;
 
   return (
-    <div
-      className="cine cold-scene"
-      onClick={onSceneSurfaceClick}
-      role="presentation"
-    >
-      {coldBackground(state, round)}
+    <PeriodThemeScope periodKey={meta.periodKey}>
       <div
-        className="cine-shade"
-        style={{ background: 'linear-gradient(to top, rgba(0,0,0,.92), rgba(0,0,0,.2) 70%)' }}
-      />
-      {head}
-      <div className="cine-in cold-open-body">
-        <h4 className="cold-open-kop">{COLD_OPENING_KOP}</h4>
-        <p className="kick">{sb.place}</p>
-        {onderstroomStack.length > 0 || step?.kind === 'onderstroom-typing' ? (
-          <div className="cold-onderstroom-stack" aria-live="off">
-            {onderstroomStack.map((item, idx) => (
-              <Onderstroom key={`${idx}-${item.line.tekst.slice(0, 12)}`} line={item.line} reducedMotion={reducedMotion} />
-            ))}
-            {step?.kind === 'onderstroom-typing' ? (
-              <OnderstroomTyping
-                van={step.van}
-                naar={step.naar}
-                kanaal={step.kanaal}
-                reducedMotion={reducedMotion}
-              />
-            ) : null}
-          </div>
+        className="cold-scene-shell cold-scene"
+        onClick={onSceneSurfaceClick}
+        role="presentation"
+      >
+        <h1 className="sr-only">{COLD_OPENING_KOP}</h1>
+        <VergaderBeeld
+          code={vkCode}
+          alt={vkAlt}
+          caption={beeldCaption}
+          tint={content.introLook.tint}
+        />
+        <section className="cold-block cold-hardop" aria-label="Hardop gesproken">
+          {speechStack.map((line, idx) => {
+            const isTitle = !line.speaker;
+            const isLastSpeech = idx === speechStack.length - 1;
+            return (
+              <div
+                key={`${idx}-${line.text.slice(0, 16)}`}
+                ref={isLastSpeech ? hardopEndRef : undefined}
+                className={isTitle ? 'cold-titel-regel' : 'cold-hardop-regel'}
+              >
+                {line.speaker ? (
+                  <span className="cold-hardop-who" aria-hidden="true">
+                    {line.speaker}
+                  </span>
+                ) : null}
+                <p
+                  className={isTitle ? 'cold-titel-tekst' : 'cold-hardop-tekst'}
+                  aria-label={speechStepAriaLabel(line)}
+                >
+                  <SpokenLineText text={line.text} quoted={!!line.speaker} />
+                </p>
+              </div>
+            );
+          })}
+        </section>
+        {showOnderTafel ? (
+          <section className="cold-block cold-onder-tafel" aria-label="Onder tafel">
+            <h2 className="cold-onder-tafel-kop">Onder tafel</h2>
+            <div className="cold-onder-tafel-berichten">
+              {onderstroomStack.map((item, idx) => {
+                const isLast =
+                  idx === onderstroomStack.length - 1 && step?.kind !== 'onderstroom-typing';
+                return (
+                  <div
+                    key={`${idx}-${item.line.tekst.slice(0, 12)}`}
+                    ref={isLast ? onderEndRef : undefined}
+                  >
+                    <Onderstroom line={item.line} reducedMotion={reducedMotion} />
+                  </div>
+                );
+              })}
+              {step?.kind === 'onderstroom-typing' ? (
+                <div ref={onderEndRef}>
+                  <OnderstroomTyping
+                    van={step.van}
+                    naar={step.naar}
+                    kanaal={step.kanaal}
+                    reducedMotion={reducedMotion}
+                  />
+                </div>
+              ) : onderstroomStack.length === 0 ? (
+                <div ref={onderEndRef} className="cold-onder-scroll-anchor" aria-hidden="true" />
+              ) : null}
+            </div>
+          </section>
         ) : null}
-        <p className="sub" aria-live="polite" aria-label={speechAria}>
-          {displaySpeech.speaker ? <span className="who">{displaySpeech.speaker}</span> : null}
-          <SpokenLineText text={displaySpeech.text} quoted={!!displaySpeech.speaker} />
+        <p className="sr-only" aria-live="polite" aria-atomic="true">
+          {announceLabel}
         </p>
         <div className="cold-progress" aria-hidden="true">
           {timeline.map((_, i) => (
             <span key={i} className={i <= roundUi.coldSub ? 'on' : undefined} />
           ))}
         </div>
-        <p className="task-line">
-          {coldSceneTaskLine({ last, hasBeslistijdTimer: hasTimer, manualAdvance })}
-        </p>
-        <div className="filmbtns">
+        {sceneTaskLine ? <p className="cold-scene-task">{sceneTaskLine}</p> : null}
+        <div className="filmbtns cold-scene-controls" role="toolbar" aria-label="Afspelen van de scène">
           {last ? (
             <button type="button" className="btn gold big" onClick={skipToOnderzoek}>
               Start met onderzoek
@@ -243,33 +322,59 @@ export function ColdPhase({
           ) : (
             <>
               {!manualAdvance ? (
+                <>
+                  <button
+                    type="button"
+                    className="btn"
+                    title="Sneller door de scène"
+                    aria-label="Sneller door de scène"
+                    onClick={advanceLine}
+                  >
+                    Sneller
+                  </button>
+                  <button
+                    type="button"
+                    className="btn ghost"
+                    title={autoPaused ? 'Automatische weergave hervatten' : 'Automatische weergave pauzeren'}
+                    aria-pressed={autoPaused}
+                    aria-label={
+                      autoPaused ? 'Automatische weergave hervatten' : 'Automatische weergave pauzeren'
+                    }
+                    onClick={() => setAutoPaused((p) => !p)}
+                  >
+                    {autoPaused ? 'Verder (auto)' : 'Pauze'}
+                  </button>
+                </>
+              ) : (
                 <button
                   type="button"
-                  className="btn ghost"
-                  aria-pressed={autoPaused}
-                  aria-label={autoPaused ? 'Automatische weergave hervatten' : 'Automatische weergave pauzeren'}
-                  onClick={() => setAutoPaused((p) => !p)}
+                  className="btn"
+                  title="Volgende regel"
+                  aria-label="Volgende regel in de scène"
+                  onClick={advanceLine}
                 >
-                  {autoPaused ? 'Verder (auto)' : 'Pauze'}
-                </button>
-              ) : (
-                <button type="button" className="btn" onClick={advanceLine}>
                   Verder
                 </button>
               )}
-              <button type="button" className="btn ghost" onClick={skipToOnderzoek}>
-                Overslaan
+              <button
+                type="button"
+                className="btn ghost"
+                title="Scène stoppen"
+                aria-label="Scène stoppen en naar onderzoek"
+                onClick={skipToOnderzoek}
+              >
+                Stop
               </button>
             </>
           )}
         </div>
         {autoOn ? (
-          <p className="note cold-auto-hint" aria-live="off">
+          <p className="note cold-auto-status" aria-live="off">
             Automatische weergave actief
           </p>
         ) : null}
         <HelpLinks onHowto={openHowto} onGloss={openGloss} />
       </div>
-    </div>
+    </PeriodThemeScope>
   );
 }

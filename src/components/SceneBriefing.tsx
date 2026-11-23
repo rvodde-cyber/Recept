@@ -6,11 +6,14 @@ import {
   COLD_OPENING_KOP,
   SCENE_BRIEFING_BODY,
   SCENE_BRIEFING_FOLLOW,
+  SCENE_BRIEFING_TEMPO_AUTO,
+  SCENE_BRIEFING_TEMPO_MANUAL,
   SCENE_BRIEFING_TIMER_HINT,
 } from '../game/coldOpenCopy';
 import { PeriodThemeScope } from './PeriodThemeScope';
 import { HelpLinks } from './HelpLinks';
 import { useUiModals } from '../context/UiModalsContext';
+import { usePrefersReducedMotion } from '../lib/prefersReducedMotion';
 
 type Props = {
   episode: EpisodeId;
@@ -20,10 +23,12 @@ type Props = {
 
 export function SceneBriefing({ episode, round, onStart }: Props) {
   const { openHowto, openGloss } = useUiModals();
+  const reducedMotion = usePrefersReducedMotion();
   const kopRef = useRef<HTMLHeadingElement>(null);
   const btnRef = useRef<HTMLButtonElement>(null);
   const meta = episodeMeta(episode);
   const hasTimer = usesBeslistijdTimer(episode);
+  const tempoHint = reducedMotion ? SCENE_BRIEFING_TEMPO_MANUAL : SCENE_BRIEFING_TEMPO_AUTO;
 
   useEffect(() => {
     kopRef.current?.focus();
@@ -63,6 +68,7 @@ export function SceneBriefing({ episode, round, onStart }: Props) {
           >
             Start de scène
           </button>
+          <p className="scene-briefing__tempo-hint">{tempoHint}</p>
           <HelpLinks onHowto={openHowto} onGloss={openGloss} />
         </article>
       </div>

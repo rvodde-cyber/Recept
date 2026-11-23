@@ -467,7 +467,7 @@ describe('taalronde cold opens (5 nov 2026)', () => {
         ['', 'Maandag, 09:14. Het verzuim is weer gestegen.'],
       ],
     });
-    expect(episodeContent(4).onderstroomActief).toBe(false);
+    expect(episodeContent(4).onderstroomActief).toBe(true);
     expect(COLD_OPEN[2].lines[2]).toEqual([
       'ERIK',
       'Groter worden betekent vooral meer formulieren, Marco.',

@@ -95,7 +95,7 @@ export type EpisodeContent = {
   gesprekskaartActief: boolean;
   /** Afleveringstrailer vóór intro; standaard aan (uitzetten zonder UI-wijziging). */
   trailerActief: boolean;
-  /** Onderstroom in cold opens; A4 standaard uit (golden demo). */
+  /** Onderstroom in cold opens; standaard aan (gesproken `lines` blijven golden-referentie). */
   onderstroomActief: boolean;
   /** Introfase: posterindeling met beeld rechts (A4-demo uit). */
   introBeeldRechts: boolean;
@@ -107,6 +107,9 @@ export type EpisodeContent = {
   introLook: EpisodeIntroLook;
   /** Alleen A4: blok „Hoe het zo ver kwam” onder de andere introkoppen */
   overstapUitleg?: string;
+  /** Openingsscène — vergadertafel per ronde (`public/beelden/<code>.jpg`) */
+  vergaderBeeld: VergaderBeeldCodes;
+  vergaderBeeldAlt: string;
 };
 
 export type IntroKader = 'polaroid' | 'kettingpapier' | 'venster' | 'dashboard' | 'glas';
@@ -117,6 +120,14 @@ export type EpisodeIntroLook = {
   tint: string;
   kicker: string;
   onderschrift: string;
+};
+
+export type VergaderBeeldCodes = {
+  ronde1: string;
+  ronde2: string;
+  /** Optioneel; anders `vergaderBeeldAlt` */
+  altRonde1?: string;
+  altRonde2?: string;
 };
 
 /** Object-position voor intro-JPEG (`object-fit: cover`), procenten 0–100. Alleen `introBeeldRechts`. */
@@ -183,6 +194,76 @@ const INTRO_REGISTER: Record<
   },
 };
 
+const VERGADER_REGISTER: Record<
+  EpisodeId,
+  Pick<EpisodeContent, 'vergaderBeeld' | 'vergaderBeeldAlt'>
+> = {
+  1: {
+    vergaderBeeld: {
+      ronde1: 'VK1',
+      ronde2: 'VK1-2',
+      altRonde2:
+        'Schuur in 1984 met een werkbank, koffiekopjes, een kasboek en een volle asbak, na een gesprek.',
+    },
+    vergaderBeeldAlt:
+      'Keukentafel in 1984 met koffiekopjes, een schrijfblok en een volle asbak, net na een gesprek.',
+  },
+  2: {
+    vergaderBeeld: {
+      ronde1: 'VK2-1',
+      ronde2: 'VK2',
+      altRonde1:
+        'Fabrieksvloer in 1996 met een lopende band en een tafeltje met klembord en koffiekopjes.',
+    },
+    vergaderBeeldAlt:
+      'Kantinetafel in 1996 met koffiebekers, een volle asbak en gele briefjes, net na een overleg.',
+  },
+  3: {
+    vergaderBeeld: { ronde1: 'VK3', ronde2: 'VK3' },
+    vergaderBeeldAlt:
+      'Vergadertafel in 2009 met plastic bekers, uitgeprinte cijfers en een telefoon, net na een vergadering.',
+  },
+  4: {
+    vergaderBeeld: {
+      ronde1: 'VK4-1',
+      ronde2: 'VK4-2',
+      altRonde1:
+        'Eetkamer van een villa na een verjaardagsdiner, met taart, glazen en cadeaupapier op tafel.',
+      altRonde2:
+        'Hal 3 van de dronefabriek met een nieuw hek en een pasjeslezer bij de ingang.',
+    },
+    vergaderBeeldAlt:
+      'Vergaderruimte in 2026 met een groot scherm, laptops en een drone-model, net na een overleg.',
+  },
+  5: {
+    vergaderBeeld: {
+      ronde1: 'VK5-1',
+      ronde2: 'VK5',
+      altRonde1:
+        'Glazen ingang van een kantoorgebouw in 2036, met een verre schuur in de weerspiegeling.',
+    },
+    vergaderBeeldAlt:
+      'Lichte vergaderruimte in 2036 met een glazen paneel en een lensdoosje, net na een gesprek.',
+  },
+};
+
+function vergaderEpisodeFields(id: EpisodeId): Pick<EpisodeContent, 'vergaderBeeld' | 'vergaderBeeldAlt'> {
+  return VERGADER_REGISTER[id];
+}
+
+export function vergaderBeeldFileCode(episode: EpisodeId, round: 1 | 2): string {
+  const v = episodeContent(episode).vergaderBeeld;
+  return round === 2 ? v.ronde2 : v.ronde1;
+}
+
+export function vergaderBeeldAltText(episode: EpisodeId, round: 1 | 2): string {
+  const c = episodeContent(episode);
+  const v = c.vergaderBeeld;
+  if (round === 1 && v.altRonde1) return v.altRonde1;
+  if (round === 2 && v.altRonde2) return v.altRonde2;
+  return c.vergaderBeeldAlt;
+}
+
 function introEpisodeFields(id: EpisodeId): Pick<
   EpisodeContent,
   'introBeeldRechts' | 'introBeeldFocus' | 'introBeeldAlt' | 'introBeeldTekst' | 'introLook'
@@ -245,6 +326,7 @@ const EPISODE_1_CONTENT: EpisodeContent = {
   trailerActief: true,
   onderstroomActief: true,
   ...introEpisodeFields(1),
+  ...vergaderEpisodeFields(1),
 };
 
 const EPISODE_2_CONTENT: EpisodeContent = {
@@ -295,6 +377,7 @@ const EPISODE_2_CONTENT: EpisodeContent = {
   trailerActief: true,
   onderstroomActief: true,
   ...introEpisodeFields(2),
+  ...vergaderEpisodeFields(2),
 };
 
 const EPISODE_3_CONTENT: EpisodeContent = {
@@ -345,6 +428,7 @@ const EPISODE_3_CONTENT: EpisodeContent = {
   trailerActief: true,
   onderstroomActief: true,
   ...introEpisodeFields(3),
+  ...vergaderEpisodeFields(3),
 };
 
 const EPISODE_4_TUSSEN: EpisodeTussenKaart = {
@@ -397,6 +481,7 @@ const EPISODE_5_CONTENT: EpisodeContent = {
   trailerActief: true,
   onderstroomActief: true,
   ...introEpisodeFields(5),
+  ...vergaderEpisodeFields(5),
 };
 
 const EPISODE_4_CONTENT: EpisodeContent = {
@@ -424,9 +509,10 @@ const EPISODE_4_CONTENT: EpisodeContent = {
   gesprekskaart: GESPREKSKAARTEN[4],
   gesprekskaartActief: false,
   trailerActief: true,
-  onderstroomActief: false,
+  onderstroomActief: true,
   overstapUitleg: OVERSTAP_UITLEG_A4,
   ...introEpisodeFields(4),
+  ...vergaderEpisodeFields(4),
 };
 
 export const EPISODE_CONTENT: Record<EpisodeId, EpisodeContent> = {

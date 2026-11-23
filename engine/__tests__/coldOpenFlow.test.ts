@@ -53,10 +53,16 @@ describe('cold open grens uit register', () => {
     expect(end.rounds[2].coldSub).toBe(6);
   });
 
-  it('aflevering 4 ronde 1: demo cold open ongewijzigd lengte', () => {
+  it('aflevering 4 ronde 1: vijf gesproken regels + onderstroom in timeline', () => {
     const lines = episodeContent(4).coldOpen[1]!.lines.length;
     expect(lines).toBe(5);
-    expect(coldOpenMaxSub(4, 1)).toBe(4);
+    expect(coldOpenMaxSub(4, 1)).toBe(6);
+  });
+
+  it('aflevering 4 ronde 2: coldSub tot typ-indicator na Ans', () => {
+    expect(coldOpenMaxSub(4, 2)).toBe(7);
+    const end = advanceColdToEnd(freshEpisode(4), 2);
+    expect(end.rounds[2].coldSub).toBe(7);
   });
 });
 

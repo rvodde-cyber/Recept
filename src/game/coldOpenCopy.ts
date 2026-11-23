@@ -12,6 +12,12 @@ export const SCENE_BRIEFING_FOLLOW =
 
 export const SCENE_BRIEFING_TIMER_HINT = 'De tijd start zodra jullie op de knop drukken.';
 
+export const SCENE_BRIEFING_TEMPO_AUTO =
+  'Kijk de scène. De regels lopen vanzelf door; tik ergens, spatie of enter om sneller te gaan. Pauzeer de automatische weergave indien nodig.';
+
+export const SCENE_BRIEFING_TEMPO_MANUAL =
+  'Kijk de scène. Tik op Verder of druk op spatie voor de volgende regel.';
+
 export function coldTrailerIntroTaskLine(): string {
   return 'Kijk eerst de trailer. Daarna volgt de scène regel voor regel. Tik of druk op spatie om sneller door te gaan.';
 }
@@ -26,8 +32,5 @@ export function coldSceneTaskLine(opts: {
       ? 'Dit was de scène. Druk op de knop: dan start de beslistijd van tien minuten.'
       : 'Dit was de scène. Druk op de knop om met onderzoek te starten.';
   }
-  if (opts.manualAdvance) {
-    return 'Kijk de scène. Tik op Verder of druk op spatie voor de volgende regel.';
-  }
-  return 'Kijk de scène. De regels lopen vanzelf door; tik ergens, spatie of enter om sneller te gaan. Pauzeer de automatische weergave indien nodig.';
+  return '';
 }

@@ -6,10 +6,10 @@ Laatste update: **november 2026** — Cloudflare Pages
 
 | Link | URL |
 | --- | --- |
-| Student | `https://<PROJECTNAAM>.pages.dev/` |
-| Docent | `https://<PROJECTNAAM>.pages.dev/?docent=1` |
+| Student | `https://recept-x7k2q.pages.dev/` |
+| Docent | `https://recept-x7k2q.pages.dev/?docent=1` |
 
-Vervang `<PROJECTNAAM>` door de projectnaam in Cloudflare Pages zodra die staat.
+Projectnaam in Cloudflare Pages: `recept-x7k2q`.
 
 ### Vervallen adres (Netlify)
 
@@ -60,7 +60,7 @@ Deploy loopt via Git-integratie; er is geen aparte Netlify/CLI-productiestap mee
 
 ## QR-code (student)
 
-Zodra het live `pages.dev`-adres vaststaat, genereer de student-QR (zie `npm run qr` en `scripts/generate-qr-student.ts`). De QR nog niet vervangen zolang `<PROJECTNAAM>` een placeholder is.
+Het live adres staat vast. Genereer de student-QR met `QR_BASE_URL=https://recept-x7k2q.pages.dev npm run qr` (zie `scripts/generate-qr-student.ts`).
 
 ## Beveiliging headers
 

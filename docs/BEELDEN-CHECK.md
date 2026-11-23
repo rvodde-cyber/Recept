@@ -30,6 +30,23 @@ Voor `introBeeldRechts` zet het register **`introBeeldFocus`** (`{ x, y }` in pr
 | A4 | — | Geen intro split / geen veld |
 | A5 | **50%, 50%** | Glazen ingang — verfijnen bij definitief I5 |
 
+## Vergadertafel openingsscène (nov 2026)
+
+| Code | Gebruik in UI | Bestand | Alt (register) | Status |
+| --- | --- | --- | --- | --- |
+| VK1 | A1 ronde 1 | `public/beelden/VK1.jpg` | `vergaderBeeldAlt` ep1 | **te maken door Richard** |
+| VK1-2 | A1 ronde 2 | `public/beelden/VK1-2.jpg` | `vergaderBeeld.altRonde2` ep1 | **te maken door Richard** |
+| VK2-1 | A2 ronde 1 | `public/beelden/VK2-1.jpg` | `vergaderBeeld.altRonde1` ep2 | **te maken door Richard** |
+| VK2 | A2 ronde 2 | `public/beelden/VK2.jpg` | `vergaderBeeldAlt` ep2 | **te maken door Richard** |
+| VK3 | A3 ronde 1 en 2 | `public/beelden/VK3.jpg` | `vergaderBeeldAlt` ep3 | **te maken door Richard** |
+| VK4-1 | A4 ronde 1 | `public/beelden/VK4-1.jpg` | `vergaderBeeld.altRonde1` ep4 | **te maken door Richard** |
+| VK4-2 | A4 ronde 2 | `public/beelden/VK4-2.jpg` | `vergaderBeeld.altRonde2` ep4 | **te maken door Richard** |
+| VK5-1 | A5 ronde 1 | `public/beelden/VK5-1.jpg` | `vergaderBeeld.altRonde1` ep5 | **te maken door Richard** |
+| VK5 | A5 ronde 2 | `public/beelden/VK5.jpg` | `vergaderBeeldAlt` ep5 | **te maken door Richard** |
+| VK4 | *(niet meer in UI; vervangen door VK4-2)* | `public/beelden/VK4.jpg` | was MT-vergaderruimte — bestand mag blijven liggen | archief |
+
+App laadt JPG direct; geen `akkoordRichard`-gate. Codes per ronde: `EPISODE_CONTENT` → `vergaderBeeld.ronde1` / `ronde2`.
+
 ## UI — nog te leveren of te verbeteren (6 nov 2026)
 
 | Onderdeel | Aflevering | Status |

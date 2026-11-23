@@ -14,7 +14,7 @@ import {
   speechStepAriaLabel,
   typingAriaLabel,
 } from '../../src/game/coldOpenA11y';
-import type { OnderstroomLineDef } from '@data/episodes/coldOpenModel';
+import type { ColdTimelineStep, OnderstroomLineDef } from '@data/episodes/coldOpenModel';
 
 function timelineTexts(steps: ReturnType<typeof buildColdTimeline>) {
   return steps.map((s) => {
@@ -26,12 +26,10 @@ function timelineTexts(steps: ReturnType<typeof buildColdTimeline>) {
 }
 
 describe('onderstroom — vlag en golden lines', () => {
-  it('A1–A3 en A5: onderstroomActief; A4 uit (demo)', () => {
-    expect(episodeContent(1).onderstroomActief).toBe(true);
-    expect(episodeContent(2).onderstroomActief).toBe(true);
-    expect(episodeContent(3).onderstroomActief).toBe(true);
-    expect(episodeContent(4).onderstroomActief).toBe(false);
-    expect(episodeContent(5).onderstroomActief).toBe(true);
+  it('A1–A5: onderstroomActief aan', () => {
+    for (const ep of [1, 2, 3, 4, 5] as const) {
+      expect(episodeContent(ep).onderstroomActief).toBe(true);
+    }
   });
 
   it('vlag uit: timeline gelijk aan gesproken regels', () => {
@@ -40,11 +38,14 @@ describe('onderstroom — vlag en golden lines', () => {
     expect(steps.every((s) => s.kind === 'speech')).toBe(true);
   });
 
-  it('A4 demo: onderstroom in data maar timeline ongewijzigd lengte', () => {
-    expect(COLD_OPEN[1].onderstroom?.length).toBeGreaterThan(0);
-    expect(coldOpenMaxSub(4, 1)).toBe(4);
+  it('A4: vlag uit = alleen speech; vlag aan = onderstroom in timeline', () => {
+    expect(COLD_OPEN[1].onderstroom?.length).toBe(2);
     expect(buildColdTimeline(COLD_OPEN[1], false)).toHaveLength(5);
     expect(buildColdTimeline(COLD_OPEN[2], false)).toHaveLength(5);
+    expect(coldOpenMaxSub(4, 1)).toBe(6);
+    expect(coldOpenMaxSub(4, 2)).toBe(7);
+    expect(buildColdTimeline(COLD_OPEN[1], true)).toHaveLength(7);
+    expect(buildColdTimeline(COLD_OPEN[2], true)).toHaveLength(8);
   });
 
   it('A1 r1: drie kantlijnstappen tussen bestaande gesproken regels', () => {
@@ -108,6 +109,44 @@ describe('onderstroom — reduced motion', () => {
     };
     const html = renderToStaticMarkup(React.createElement(Onderstroom, { line, reducedMotion: true }));
     expect(html).not.toContain('onderstroom-item--fade');
+  });
+});
+
+describe('onderstroom — volgorde A4', () => {
+  it('ronde 1: twee app-berichten direct na Harrie', () => {
+    const steps = buildColdTimeline(COLD_OPEN[1], true);
+    const texts = timelineTexts(steps);
+    expect(texts.indexOf('Vroeger kende ik iedereen bij naam.')).toBeLessThan(
+      texts.indexOf('Pap begint weer over vroeger.'),
+    );
+    expect(texts.indexOf('Pap begint weer over vroeger.')).toBeLessThan(texts.indexOf('Hij kende ze nog.'));
+    const apps = steps.filter(
+      (s): s is Extract<ColdTimelineStep, { kind: 'onderstroom' }> =>
+        s.kind === 'onderstroom' && s.line.kanaal === 'app',
+    );
+    expect(apps).toHaveLength(2);
+    expect(apps[0]!.line.van).toBe('Marco');
+    expect(apps[1]!.line.van).toBe('Sanne');
+  });
+
+  it('ronde 2: app na Erik, daarna na Ans typ-indicator (geen verzonden "Dat is toch…")', () => {
+    const steps = buildColdTimeline(COLD_OPEN[2], true);
+    const texts = timelineTexts(steps);
+    expect(texts).toEqual([
+      'Een half jaar later. Hal 3 krijgt een hek en een pasjeslezer.',
+      'Vrijdag tekenen we. Dan zijn we eindelijk groot.',
+      'Groter worden betekent vooral meer formulieren, Marco.',
+      'Kun jij Erik even afremmen?',
+      'Nee. Hij heeft een punt.',
+      'Ik heb deze week maar twee uur op de vloer gestaan. De rest was overleg.',
+      '[typing]',
+      'Dinsdag, 09:14. Piotrs pas werkt niet meer.',
+    ]);
+    expect(steps.some((s) => s.kind === 'onderstroom' && s.line.tekst === 'Dat is toch…')).toBe(false);
+    const typing = steps.filter((s) => s.kind === 'onderstroom-typing');
+    expect(typing).toHaveLength(1);
+    expect(typing[0]!.van).toBe('Marco');
+    expect(typingAriaLabel('Marco')).toContain('wist het');
   });
 });
 
