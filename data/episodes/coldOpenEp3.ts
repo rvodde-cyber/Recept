@@ -1,10 +1,11 @@
-import type { OnderstroomInsert } from './coldOpenModel';
+import type { OnderstroomInsert, VraagregelBlock } from './coldOpenModel';
 
 type Ep3Cold = {
   place: string;
   img: string;
   lines: readonly [string, string][];
   onderstroom?: readonly OnderstroomInsert[];
+  vraagregels?: readonly VraagregelBlock[];
 };
 
 const EP3_R1_ONDERSTROOM: readonly OnderstroomInsert[] = [
@@ -82,6 +83,17 @@ export const COLD_OPEN_EP3: { 1: Ep3Cold; 2: Ep3Cold } = {
       ['', 'Niemand zegt iets. Buiten rijdt een vrachtwagen achteruit.'],
     ],
     onderstroom: EP3_R1_ONDERSTROOM,
+    vraagregels: [
+      {
+        afterIndex: 3,
+        lines: [
+          [
+            'MARCO',
+            'Wie beslist er op welke vestiging waarover, pap? En hoe houden we dan overzicht?',
+          ],
+        ],
+      },
+    ],
   },
   2: {
     place: 'VERGADERRUIMTE, TILBURG',
@@ -95,5 +107,13 @@ export const COLD_OPEN_EP3: { 1: Ep3Cold; 2: Ep3Cold } = {
       ['', 'Vrijdag, tien voor vijf. Er komt een sms binnen.'],
     ],
     onderstroom: EP3_R2_ONDERSTROOM,
+    vraagregels: [
+      {
+        afterIndex: 4,
+        lines: [
+          ['HARRIE', 'Wat doet dat ding met de jongens? En hoe ver laten we het gaan?'],
+        ],
+      },
+    ],
   },
 };

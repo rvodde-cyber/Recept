@@ -26,6 +26,7 @@ import { applyDilemmaHidden, applyHiddenAfterRound } from './hiddenMeters';
 import { phaseAfterBesluitConfirm, phaseAfterGesprek } from './gesprekFlow';
 import { validateGesprekOpslaan, type GesprekskaartExportEntry } from '@data/schemas/gesprekskaart.schema';
 import { gesprekskaartVoor } from '@data/gesprekskaarten';
+import { hulpvraagVoor } from '@content/hulpvraag.nl';
 import { moetAfleveringstrailer } from './episodeTrailerFlow';
 import type { GameUiState, Phase } from './uiTypes';
 import type { FilmKind } from './uiTypes';
@@ -73,7 +74,8 @@ export type GameAction =
   | { type: 'EXIT_TO_HOME' }
   | { type: 'TICK' }
   | { type: 'ADJUST_TIMER'; delta: number }
-  | { type: 'SET_TIMER_ON'; on: boolean };
+  | { type: 'SET_TIMER_ON'; on: boolean }
+  | { type: 'HULPVRAAG_GETOOND' };
 
 function roundState(state: GameUiState) {
   return state.rounds[state.round];
@@ -137,6 +139,11 @@ export function gameReducer(state: GameUiState, action: GameAction): GameUiState
       return { ...state, team: action.team.slice(0, 40) };
     case 'SET_PHASE':
       return { ...state, phase: action.phase };
+    case 'HULPVRAAG_GETOOND': {
+      const id = hulpvraagVoor(state.episode).id;
+      if (state.hulpvraag?.getoond && state.hulpvraag.id === id) return state;
+      return { ...state, hulpvraag: { id, getoond: true } };
+    }
     case 'START_COLD_SCENE': {
       const r = roundState(state);
       if (r.sceneGestartOp != null) return state;

@@ -1,10 +1,11 @@
-import type { OnderstroomInsert } from './coldOpenModel';
+import type { OnderstroomInsert, VraagregelBlock } from './coldOpenModel';
 
 type Ep2Cold = {
   place: string;
   img: string;
   lines: readonly [string, string][];
   onderstroom?: readonly OnderstroomInsert[];
+  vraagregels?: readonly VraagregelBlock[];
 };
 
 const EP2_R1_ONDERSTROOM: readonly OnderstroomInsert[] = [
@@ -82,6 +83,14 @@ export const COLD_OPEN_EP2: { 1: Ep2Cold; 2: Ep2Cold } = {
       ['', 'Niemand maakt vandaag nog een heel worstenbroodje.'],
     ],
     onderstroom: EP2_R1_ONDERSTROOM,
+    vraagregels: [
+      {
+        afterIndex: 3,
+        lines: [
+          ['LIES', 'Tachtig mensen, Harrie. Wie gaat waarover, en hoe houden we iedereen erbij?'],
+        ],
+      },
+    ],
   },
   2: {
     place: 'KANTINE, LOVEN',
@@ -95,5 +104,11 @@ export const COLD_OPEN_EP2: { 1: Ep2Cold; 2: Ep2Cold } = {
       ['', 'Donderdag, kwart over vier. Tussen de loonzakjes zit een briefje zonder naam.'],
     ],
     onderstroom: EP2_R2_ONDERSTROOM,
+    vraagregels: [
+      {
+        afterIndex: 4,
+        lines: [['LIES', 'Hoe kunnen ze meepraten, en waarover?']],
+      },
+    ],
   },
 };

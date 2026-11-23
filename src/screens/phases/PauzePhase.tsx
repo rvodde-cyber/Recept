@@ -2,6 +2,7 @@ import { episodeMeta } from '@data/episodes/meta';
 import { roundDefFor } from '../../game/roundSource';
 import type { GameAction } from '../../game/gameReducer';
 import type { GameUiState } from '../../game/uiTypes';
+import { eindeAfleveringNaPauzekaart } from '../../game/hulpvraagFlow';
 
 export function PauzePhase({ state, dispatch }: { state: GameUiState; dispatch: (a: GameAction) => void }) {
   const meta = episodeMeta(state.episode);
@@ -32,8 +33,8 @@ export function PauzePhase({ state, dispatch }: { state: GameUiState; dispatch: 
             Conceptinterventies gespeeld: {state.conceptLog.join(', ')}
           </p>
         ) : null}
-        <button type="button" className="btn ghost" onClick={() => dispatch({ type: 'SET_PHASE', phase: 'nabespreking' })}>
-          Naar de nabespreking
+        <button type="button" className="btn ghost" onClick={() => eindeAfleveringNaPauzekaart(dispatch)}>
+          Verder
         </button>
         <button type="button" className="btn gold big" onClick={() => dispatch({ type: 'EXIT_TO_HOME' })}>
           Terug naar afleveringen

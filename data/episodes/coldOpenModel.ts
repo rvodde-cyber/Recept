@@ -17,6 +17,12 @@ export type OnderstroomLineDef = {
 /** Invoeging na een gesproken/titelregel (index in `lines`). */
 export type OnderstroomInsert = OnderstroomLineDef & { afterIndex: number };
 
+/** Familievraag na ankerregel; vóór titelkaart in afspeellijst. */
+export type VraagregelBlock = {
+  afterIndex: number;
+  lines: readonly [string, string][];
+};
+
 export type ColdTimelineStep =
   | { kind: 'speech'; speaker: string; text: string }
   | { kind: 'onderstroom'; line: OnderstroomLineDef }

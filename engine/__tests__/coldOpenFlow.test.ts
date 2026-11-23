@@ -48,9 +48,9 @@ describe('cold open grens uit register', () => {
 
   it('aflevering 1 ronde 2: golden 5 regels + onderstroom (index 0–6)', () => {
     expect(coldOpenForRound(1, 2).lines).toHaveLength(5);
-    expect(coldOpenMaxSub(1, 2)).toBe(6);
+    expect(coldOpenMaxSub(1, 2)).toBe(7);
     const end = advanceColdToEnd(freshEpisode(1), 2);
-    expect(end.rounds[2].coldSub).toBe(6);
+    expect(end.rounds[2].coldSub).toBe(7);
   });
 
   it('aflevering 4 ronde 1: vijf gesproken regels + onderstroom in timeline', () => {

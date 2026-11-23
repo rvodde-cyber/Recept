@@ -121,5 +121,6 @@ export function freshEpisode(episode: EpisodeId): GameUiState {
     filmKind: null,
     gok: null,
     gesprekskaarten: [],
+    hulpvraag: null,
   };
 }

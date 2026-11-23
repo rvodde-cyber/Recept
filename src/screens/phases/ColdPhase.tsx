@@ -73,7 +73,7 @@ export function ColdPhase({
   const sb = content.coldOpen[round] ?? content.coldOpen[1]!;
   const timeline = useMemo(
     () => coldOpenTimelineForRound(state.episode, round),
-    [state.episode, round, content.onderstroomActief, sb],
+    [state.episode, round, content.onderstroomActief, content.vraagregelActief, sb],
   );
   const skeleton = content.roundCount === 1;
   const multiRound = content.roundCount === 2;

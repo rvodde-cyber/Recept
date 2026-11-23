@@ -3,6 +3,7 @@ import type { GameAction } from '../../game/gameReducer';
 import type { GameUiState } from '../../game/uiTypes';
 import { mtKoosPiotrInDienst, resolveTestamentForSpel } from '@data/piotrSpel';
 import { useDocentMode } from '../../hooks/useDocentMode';
+import { eindeAfleveringNaPauzekaart } from '../../game/hulpvraagFlow';
 
 const GOK_EP4 = [
   { id: 'marco', t: 'Marco' },
@@ -53,12 +54,8 @@ export function VoorspelPhase({ state, dispatch }: { state: GameUiState; dispatc
             </div>
           </section>
         ) : null}
-        <button
-          type="button"
-          className="btn gold big"
-          onClick={() => dispatch({ type: 'SET_PHASE', phase: 'nabespreking' })}
-        >
-          Naar de nabespreking
+        <button type="button" className="btn gold big" onClick={() => eindeAfleveringNaPauzekaart(dispatch)}>
+          Verder
         </button>
         <button type="button" className="btn ghost" onClick={() => dispatch({ type: 'EXIT_TO_HOME' })}>
           Terug naar afleveringen
@@ -120,8 +117,8 @@ export function VoorspelPhase({ state, dispatch }: { state: GameUiState; dispatc
           ))}
         </div>
       </section>
-      <button type="button" className="btn gold big" onClick={() => dispatch({ type: 'SET_PHASE', phase: 'nabespreking' })}>
-        Naar de nabespreking
+      <button type="button" className="btn gold big" onClick={() => eindeAfleveringNaPauzekaart(dispatch)}>
+        Verder
       </button>
       <button type="button" className="btn ghost" onClick={() => dispatch({ type: 'EXIT_TO_HOME' })}>
         Terug naar afleveringen

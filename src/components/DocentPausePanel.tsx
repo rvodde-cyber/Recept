@@ -3,6 +3,8 @@ import { downloadTeamExport, waardeLabels } from '../game/teamExport';
 import { gesprekskaartVoor } from '@data/gesprekskaarten';
 import type { GameAction } from '../game/gameReducer';
 import type { GameUiState, Phase } from '../game/uiTypes';
+import { loadHulpvraagTonen, saveHulpvraagTonen } from '../lib/onderwijsSettings';
+import { useState } from 'react';
 
 const PHASES: { id: Phase; label: string }[] = [
   { id: 'trailer', label: 'Trailer' },
@@ -18,6 +20,7 @@ const PHASES: { id: Phase; label: string }[] = [
   { id: 'voorspel', label: 'Voorspel' },
   { id: 'opvolging', label: 'Opvolging' },
   { id: 'pauze', label: 'Pauze' },
+  { id: 'hulpvraag', label: 'Hulpvraag' },
   { id: 'nabespreking', label: 'Nabespreking' },
 ];
 
@@ -28,6 +31,7 @@ type Props = {
 
 export function DocentPausePanel({ state, dispatch }: Props) {
   const docent = useDocentMode();
+  const [hulpvraagTonen, setHulpvraagTonen] = useState(() => loadHulpvraagTonen());
   if (!docent) return null;
 
   const h = state.hidden;
@@ -47,6 +51,18 @@ export function DocentPausePanel({ state, dispatch }: Props) {
           {state.timerOn ? 'Timer pauzeren' : 'Timer hervatten'}
         </button>
       </div>
+      <label className="docent-row">
+        <span>Onderwijsversie: hulpvraagkaart tonen</span>
+        <input
+          type="checkbox"
+          checked={hulpvraagTonen}
+          onChange={(e) => {
+            const on = e.target.checked;
+            setHulpvraagTonen(on);
+            saveHulpvraagTonen(on);
+          }}
+        />
+      </label>
       <label className="docent-row">
         <span>Spring naar fase</span>
         <select
@@ -115,6 +131,11 @@ export function DocentPausePanel({ state, dispatch }: Props) {
             </tbody>
           </table>
         </div>
+      ) : null}
+      {state.hulpvraag?.getoond ? (
+        <p className="note">
+          <strong>Hulpvraag</strong> — {state.hulpvraag.id} (getoond)
+        </p>
       ) : null}
       {state.gesprekskaarten.length > 0 ? (
         <div className="docent-gesprek">

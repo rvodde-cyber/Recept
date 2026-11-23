@@ -1,10 +1,11 @@
-import type { OnderstroomInsert } from './coldOpenModel';
+import type { OnderstroomInsert, VraagregelBlock } from './coldOpenModel';
 
 type Ep1Cold = {
   place: string;
   img: string;
   lines: readonly [string, string][];
   onderstroom?: readonly OnderstroomInsert[];
+  vraagregels?: readonly VraagregelBlock[];
 };
 
 const EP1_R1_ONDERSTROOM: readonly OnderstroomInsert[] = [
@@ -72,6 +73,17 @@ export const COLD_OPEN_EP1: { 1: Ep1Cold; 2: Ep1Cold } = {
       ['', 'Maandag, half zeven. In de schuur wachten vier problemen tegelijk.'],
     ],
     onderstroom: EP1_R1_ONDERSTROOM,
+    vraagregels: [
+      {
+        afterIndex: 6,
+        lines: [
+          [
+            'LIES',
+            'Met z\'n drieën redden we dit niet, Harrie. Wie halen we erbij, en hoe doen we dat?',
+          ],
+        ],
+      },
+    ],
   },
   2: {
     place: 'SCHUUR, BERKEL-ENSCHOT',
@@ -84,5 +96,16 @@ export const COLD_OPEN_EP1: { 1: Ep1Cold; 2: Ep1Cold } = {
       ['', "Donderdag, kwart voor vijf. Tussen de pagina's van het kasboek zit een briefje."],
     ],
     onderstroom: EP1_R2_ONDERSTROOM,
+    vraagregels: [
+      {
+        afterIndex: 3,
+        lines: [
+          [
+            'LIES',
+            'Wat hebben de jongens eigenlijk nodig, Harrie? Waarom vragen ze ineens vrij?',
+          ],
+        ],
+      },
+    ],
   },
 };

@@ -20,6 +20,7 @@ export type Phase =
   | 'voorspel'
   | 'opvolging'
   | 'pauze'
+  | 'hulpvraag'
   | 'nabespreking';
 
 export type FilmKind = 'trailer-r1' | 'trailer-r2' | 'slot-r1' | 'finale';
@@ -93,6 +94,8 @@ export interface GameUiState {
   gok: string | null;
   /** Teamgesprekken (ronde 1) voor docent/export */
   gesprekskaarten: GesprekskaartExportEntry[];
+  /** Onderwijs-hulpvraag na pauzekaart */
+  hulpvraag: { id: string; getoond: boolean } | null;
 }
 
 export type BerichtFaseKey = `${1 | 2}-onderzoek` | `${1 | 2}-besluit`;

@@ -107,7 +107,7 @@ describe('openingsscène — indeling A1', () => {
     const state = sceneState(1, 1);
     state.rounds[1].coldSub = 99;
     const c = render(state);
-    const steps = buildColdTimeline(EPISODE_CONTENT[1].coldOpen[1]!, true);
+    const steps = buildColdTimeline(EPISODE_CONTENT[1].coldOpen[1]!, true, true);
     const speechSteps = steps.filter((s) => s.kind === 'speech');
     const hardop = c.querySelector('.cold-hardop');
     const texts = [...(hardop?.querySelectorAll('.cold-titel-tekst, .cold-hardop-tekst') ?? [])].map(

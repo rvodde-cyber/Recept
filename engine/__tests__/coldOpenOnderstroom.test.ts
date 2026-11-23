@@ -44,12 +44,12 @@ describe('onderstroom — vlag en golden lines', () => {
     expect(buildColdTimeline(COLD_OPEN[2], false)).toHaveLength(5);
     expect(coldOpenMaxSub(4, 1)).toBe(6);
     expect(coldOpenMaxSub(4, 2)).toBe(7);
-    expect(buildColdTimeline(COLD_OPEN[1], true)).toHaveLength(7);
-    expect(buildColdTimeline(COLD_OPEN[2], true)).toHaveLength(8);
+    expect(buildColdTimeline(COLD_OPEN[1], true, false)).toHaveLength(7);
+    expect(buildColdTimeline(COLD_OPEN[2], true, false)).toHaveLength(8);
   });
 
   it('A1 r1: drie kantlijnstappen tussen bestaande gesproken regels', () => {
-    expect(coldOpenMaxSub(1, 1)).toBe(10);
+    expect(coldOpenMaxSub(1, 1)).toBe(11);
     const steps = buildColdTimeline(COLD_OPEN_EP1[1], true);
     expect(steps.filter((s) => s.kind === 'onderstroom')).toHaveLength(3);
   });
@@ -130,7 +130,7 @@ describe('onderstroom — volgorde A4', () => {
   });
 
   it('ronde 2: app na Erik, daarna na Ans typ-indicator (geen verzonden "Dat is toch…")', () => {
-    const steps = buildColdTimeline(COLD_OPEN[2], true);
+    const steps = buildColdTimeline(COLD_OPEN[2], true, false);
     const texts = timelineTexts(steps);
     expect(texts).toEqual([
       'Een half jaar later. Hal 3 krijgt een hek en een pasjeslezer.',
@@ -162,7 +162,7 @@ describe('onderstroom — volgorde A5', () => {
   });
 
   it('ronde 2: volgorde volgens register (na ANNE-FLEUR, PIOTR, SANNE)', () => {
-    const steps = buildColdTimeline(COLD_OPEN_EP5[2], true);
+    const steps = buildColdTimeline(COLD_OPEN_EP5[2], true, true);
     const texts = timelineTexts(steps);
     expect(COLD_OPEN_EP5[2].lines).toHaveLength(6);
     expect(texts).toEqual([
@@ -175,9 +175,10 @@ describe('onderstroom — volgorde A5', () => {
       'Dat is niet hetzelfde.',
       'Ik teken pas als ik weet wat er in dat schrift staat.',
       '[typing]',
+      'Wat koopt Optivora eigenlijk precies? Waar staan wij zelf voor, en wat is onze toekomst?',
       'Vrijdag, tien voor vijf. Er staat een bericht op je lens, alleen voor jou.',
     ]);
     expect(coldOpenMaxSub(5, 2)).toBe(steps.length - 1);
-    expect(coldOpenTimelineForRound(5, 2).length).toBe(10);
+    expect(coldOpenTimelineForRound(5, 2).length).toBe(11);
   });
 });

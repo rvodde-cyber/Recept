@@ -43,6 +43,7 @@ export type TeamExport = {
   hidden: GameUiState['hidden'];
   gok: GameUiState['gok'];
   gesprekskaarten: GesprekskaartExportEntry[];
+  hulpvraag?: { id: string; getoond: boolean };
 };
 
 /** Oude of nieuwe export-ronde — zonder crash bij ontbrekende velden. */
@@ -107,6 +108,7 @@ export function buildTeamExport(state: GameUiState): TeamExport {
     hidden: state.hidden,
     gok: state.gok,
     gesprekskaarten: state.gesprekskaarten,
+    ...(state.hulpvraag?.getoond ? { hulpvraag: state.hulpvraag } : {}),
   };
 }
 

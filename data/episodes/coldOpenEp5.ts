@@ -1,10 +1,11 @@
-import type { OnderstroomInsert } from './coldOpenModel';
+import type { OnderstroomInsert, VraagregelBlock } from './coldOpenModel';
 
 type Ep5Cold = {
   place: string;
   img: string;
   lines: readonly [string, string][];
   onderstroom?: readonly OnderstroomInsert[];
+  vraagregels?: readonly VraagregelBlock[];
 };
 
 const EP5_R1_ONDERSTROOM: readonly OnderstroomInsert[] = [
@@ -85,6 +86,15 @@ export const COLD_OPEN_EP5: { 1: Ep5Cold; 2: Ep5Cold } = {
       ],
     ],
     onderstroom: EP5_R1_ONDERSTROOM,
+    vraagregels: [
+      {
+        afterIndex: 3,
+        lines: [
+          ['MARCO', 'Optivora wil vrijdag antwoord. Wie leidt de Groep daarna?'],
+          ['ANNE-FLEUR', 'En wat heeft Harrie daarover in het schrift gezet?'],
+        ],
+      },
+    ],
   },
   2: {
     place: 'HOOFDKANTOOR, VOSSENBERG',
@@ -98,5 +108,16 @@ export const COLD_OPEN_EP5: { 1: Ep5Cold; 2: Ep5Cold } = {
       ['', 'Vrijdag, tien voor vijf. Er staat een bericht op je lens, alleen voor jou.'],
     ],
     onderstroom: EP5_R2_ONDERSTROOM,
+    vraagregels: [
+      {
+        afterIndex: 4,
+        lines: [
+          [
+            'ANNE-FLEUR',
+            'Wat koopt Optivora eigenlijk precies? Waar staan wij zelf voor, en wat is onze toekomst?',
+          ],
+        ],
+      },
+    ],
   },
 };

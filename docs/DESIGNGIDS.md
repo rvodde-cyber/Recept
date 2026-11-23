@@ -101,9 +101,10 @@ Uitgebreid: **`docs/ONDERSTROOM.md`**.
 | Onderdeel | Waar |
 | --- | --- |
 | Cold open onderstroom | `ColdPhase.tsx`, `Onderstroom.tsx`, skins in `recept.css` (`.onderstroom-*`) |
-| Timeline / data | `coldOpenTimeline.ts`, `onderstroom[]` + `afterIndex` op `ColdOpenDef` |
+| Timeline / data | `coldOpenTimeline.ts`, `onderstroom[]` + `afterIndex`, `vraagregels[]` op `ColdOpenDef` |
 | **Lens (A5)** | Netvliesprojectie: `backdrop-filter`, lage opacity, label **Privé · buiten het bedrijfsplatform**; typografie afstandelijk, geen apparaatrand. Hergebruik: `.onderstroom-lens-glas` in cold open én `LensDilemmaPanel` (`.lens-dilemma-panel`). |
-| A4 onderstroom | Data aanwezig, `onderstroomActief: false` — golden demo ongewijzigd |
+| A4 vraagregel | `vraagregels` in `data/coldOpen.ts`; `vraagregelActief: false` — golden cold-flow ongewijzigd |
+| **Vraagregel cold open** | Elke cold open eindigt met een vraag van een familielid die zegt wat het team uitzoekt, zonder oplossing of kant; vlag `vraagregelActief` (A4 uit). |
 
 ## 6. Spanningselementen in aflevering 4 (waar in code)
 

@@ -40,6 +40,7 @@ import { UitkomstPhase } from './phases/UitkomstPhase';
 import { NabesprekingPhase } from './phases/NabesprekingPhase';
 import { GesprekskaartPhase } from './phases/GesprekskaartPhase';
 import { VoorspelPhase } from './phases/VoorspelPhase';
+import { HulpvraagPhase } from './phases/HulpvraagPhase';
 
 function Ticker({ state }: { state: GameUiState }) {
   const roundDef = roundDefFor(state);
@@ -138,6 +139,14 @@ export function GameShell({ state, dispatch }: { state: GameUiState; dispatch: (
       <>
         <PauzePhase state={state} dispatch={dispatch} />
         {film}
+        <MessageToastHost />
+      </>
+    );
+  }
+  if (phase === 'hulpvraag') {
+    return (
+      <>
+        <HulpvraagPhase state={state} dispatch={dispatch} />
         <MessageToastHost />
       </>
     );

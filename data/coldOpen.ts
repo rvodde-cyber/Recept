@@ -1,4 +1,4 @@
-import type { OnderstroomInsert } from './episodes/coldOpenModel';
+import type { OnderstroomInsert, VraagregelBlock } from './episodes/coldOpenModel';
 
 const A4_R1_ONDERSTROOM: readonly OnderstroomInsert[] = [
   {
@@ -59,6 +59,17 @@ export const COLD_OPEN = {
       ['', 'Maandag, 09:14. Het verzuim is weer gestegen.'],
     ] as [string, string][],
     onderstroom: A4_R1_ONDERSTROOM,
+    vraagregels: [
+      {
+        afterIndex: 3,
+        lines: [
+          [
+            'HARRIE',
+            'Defensie of civiel: wat willen we met deze fabriek? En wat doet dat met de mensen?',
+          ],
+        ],
+      },
+    ] as readonly VraagregelBlock[],
   },
   2: {
     place: 'HAL 3, VOSSENBERG',
@@ -71,5 +82,16 @@ export const COLD_OPEN = {
       ['', 'Dinsdag, 09:14. Piotrs pas werkt niet meer.'],
     ] as [string, string][],
     onderstroom: A4_R2_ONDERSTROOM,
+    vraagregels: [
+      {
+        afterIndex: 3,
+        lines: [
+          [
+            'SANNE',
+            'Wat laten we aan de systemen over, en wat blijft voor mensen?',
+          ],
+        ],
+      },
+    ] as readonly VraagregelBlock[],
   },
 } as const;

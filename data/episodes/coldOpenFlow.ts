@@ -11,7 +11,7 @@ export function coldOpenForRound(episode: EpisodeId, round: 1 | 2): ColdOpenDef 
 export function coldOpenTimelineForRound(episode: EpisodeId, round: 1 | 2) {
   const c = episodeContent(episode);
   const def = coldOpenForRound(episode, round);
-  return buildColdTimeline(def, c.onderstroomActief);
+  return buildColdTimeline(def, c.onderstroomActief, c.vraagregelActief);
 }
 
 /** Hoogste geldige coldSub-index (laatste regel). */

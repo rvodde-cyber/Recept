@@ -24,7 +24,7 @@ import type { DilemmaDef } from './dilemmaDef';
 import { TIJDGEEST, type Tijdgeest } from './tijdgeest';
 import { GESPREKSKAARTEN, type Gesprekskaart } from '../gesprekskaarten';
 import { OVERSTAP_UITLEG_A4 } from './overstapUitlegA4';
-import type { OnderstroomInsert } from './coldOpenModel';
+import type { OnderstroomInsert, VraagregelBlock } from './coldOpenModel';
 
 export type ColdOpenDef = {
   place: string;
@@ -32,6 +32,8 @@ export type ColdOpenDef = {
   lines: readonly [string, string][];
   /** Zichtbaar alleen bij `onderstroomActief`. Gesproken regels in `lines` blijven de golden-referentie. */
   onderstroom?: readonly OnderstroomInsert[];
+  /** Vraag aan het team; zichtbaar bij `vraagregelActief` op afleveringsniveau. */
+  vraagregels?: readonly VraagregelBlock[];
 };
 
 export type RoundUiSlice = {
@@ -97,6 +99,8 @@ export type EpisodeContent = {
   trailerActief: boolean;
   /** Onderstroom in cold opens; standaard aan (gesproken `lines` blijven golden-referentie). */
   onderstroomActief: boolean;
+  /** Sluitvraag familielid na cold open; A4-demo standaard uit (golden-flow). */
+  vraagregelActief: boolean;
   /** Introfase: posterindeling met beeld rechts (A4-demo uit). */
   introBeeldRechts: boolean;
   /** Alleen bij `introBeeldRechts: true` — `object-position` voor cover-beeld. */
@@ -325,6 +329,7 @@ const EPISODE_1_CONTENT: EpisodeContent = {
   gesprekskaartActief: true,
   trailerActief: true,
   onderstroomActief: true,
+  vraagregelActief: true,
   ...introEpisodeFields(1),
   ...vergaderEpisodeFields(1),
 };
@@ -376,6 +381,7 @@ const EPISODE_2_CONTENT: EpisodeContent = {
   gesprekskaartActief: true,
   trailerActief: true,
   onderstroomActief: true,
+  vraagregelActief: true,
   ...introEpisodeFields(2),
   ...vergaderEpisodeFields(2),
 };
@@ -427,6 +433,7 @@ const EPISODE_3_CONTENT: EpisodeContent = {
   gesprekskaartActief: true,
   trailerActief: true,
   onderstroomActief: true,
+  vraagregelActief: true,
   ...introEpisodeFields(3),
   ...vergaderEpisodeFields(3),
 };
@@ -480,6 +487,7 @@ const EPISODE_5_CONTENT: EpisodeContent = {
   gesprekskaartActief: true,
   trailerActief: true,
   onderstroomActief: true,
+  vraagregelActief: true,
   ...introEpisodeFields(5),
   ...vergaderEpisodeFields(5),
 };
@@ -510,6 +518,7 @@ const EPISODE_4_CONTENT: EpisodeContent = {
   gesprekskaartActief: false,
   trailerActief: true,
   onderstroomActief: true,
+  vraagregelActief: false,
   overstapUitleg: OVERSTAP_UITLEG_A4,
   ...introEpisodeFields(4),
   ...vergaderEpisodeFields(4),
