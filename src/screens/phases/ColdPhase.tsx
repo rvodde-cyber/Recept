@@ -4,7 +4,7 @@ import { coldOpenTimelineForRound } from '@data/episodes/coldOpenFlow';
 import { episodeContent, vergaderBeeldAltText, vergaderBeeldFileCode } from '@data/episodes/content';
 import { episodeMeta } from '@data/episodes/meta';
 import { usesBeslistijdTimer } from '@data/episodes/motor';
-import type { ColdTimelineStep } from '@data/episodes/coldOpenModel';
+import { onderstroomMessageKey, type ColdTimelineStep } from '@data/episodes/coldOpenModel';
 import { SceneBackground } from '../../components/SceneBackground';
 import { HelpLinks } from '../../components/HelpLinks';
 import { Onderstroom, OnderstroomTyping } from '../../components/Onderstroom';
@@ -103,9 +103,14 @@ export function ColdPhase({
 
   const onderstroomStack = useMemo(() => {
     const out: Extract<ColdTimelineStep, { kind: 'onderstroom' }>[] = [];
+    const seen = new Set<string>();
     for (let i = 0; i <= roundUi.coldSub; i++) {
       const s = timeline[i];
-      if (s?.kind === 'onderstroom') out.push(s);
+      if (s?.kind !== 'onderstroom') continue;
+      const key = onderstroomMessageKey(s.line);
+      if (seen.has(key)) continue;
+      seen.add(key);
+      out.push(s);
     }
     return out;
   }, [timeline, roundUi.coldSub]);
@@ -283,7 +288,7 @@ export function ColdPhase({
                   idx === onderstroomStack.length - 1 && step?.kind !== 'onderstroom-typing';
                 return (
                   <div
-                    key={`${idx}-${item.line.tekst.slice(0, 12)}`}
+                    key={onderstroomMessageKey(item.line)}
                     ref={isLast ? onderEndRef : undefined}
                   >
                     <Onderstroom line={item.line} reducedMotion={reducedMotion} />

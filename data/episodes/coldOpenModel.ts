@@ -2,6 +2,16 @@ export type OnderstroomKanaal = 'kantlijn' | 'plakbriefje' | 'sms' | 'app' | 'le
 
 export type KantlijnHandschrift = 'potlood' | 'blokletters';
 
+/** Stabiele sleutel: zelfde afzender/ontvanger/tekst telt als één bericht. */
+export function onderstroomMessageKey(line: {
+  kanaal: OnderstroomKanaal;
+  van: string;
+  naar?: string;
+  tekst: string;
+}): string {
+  return `${line.kanaal}\u001f${line.van}\u001f${line.naar ?? ''}\u001f${line.tekst}`;
+}
+
 export type OnderstroomLineDef = {
   type: 'onderstroom';
   kanaal: OnderstroomKanaal;

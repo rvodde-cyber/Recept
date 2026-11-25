@@ -1,9 +1,10 @@
 # Voortgang Recept
 
-Laatst bijgewerkt: **25 november 2026** (branch `feat/recept-a1`, controle A1 + scroll).
+Laatst bijgewerkt: **25 november 2026** (branch `feat/recept-a1`, dubbele lensberichten cold open).
 
 ## Afgerond in deze sessie
 
+- **Cold open A5:** dubbele lensberichten voorkomen via dedupe in `buildColdTimeline` + render-stack; test `engine/__tests__/coldOpenDuplicates.test.ts`; data A5 r1 heeft elk bericht één keer.
 - **Controle (geen codewijziging):** A1 alinea 2 + gk1-alt conform spec in `data/gesprekskaarten.ts`; scroll bovenaan via centrale `ViewReset` / `viewKey` in `App.tsx`, test `src/lib/scrollToTop.test.tsx` (`scrollTo` top 0). Tests + build groen.
 - **Controle eerdere pass:** beeld-CSS zonder max-height; zie regels hieronder.
 - **Beeldweergave:** gesprekskaart (16:9) en vergader/VK (3:2) zonder `max-height`; breedte via `min(100%, vh)`; hulpvraag `object-position: 50% 25%`; tests `engine/__tests__/faseBeeldCss.test.ts`; `DESIGNGIDS` § beelden.
