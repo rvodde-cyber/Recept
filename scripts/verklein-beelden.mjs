@@ -20,30 +20,55 @@ function kb(path) {
   return Math.round(statSync(path).size / 1024);
 }
 
-function toWebp(src, dest, width, height) {
+function toWebp(src, dest, width, height, fit = 'cover') {
   execSync(
-    `npx --yes sharp-cli -i "${src}" -o "${dest}" -f webp -q 80 resize ${width} ${height} --fit cover`,
+    `npx --yes sharp-cli -i "${src}" -o "${dest}" -f webp -q 80 resize ${width} ${height} --fit ${fit}`,
     { stdio: 'inherit', cwd: root },
   );
 }
 
-function archiveAndConvert({ srcJpg, bronDir, outWebp, width, height, removeJpgAfter = true }) {
+function archiveAndConvert({
+  srcJpg,
+  bronDir,
+  outWebp,
+  width,
+  height,
+  fit = 'cover',
+  removeJpgAfter = true,
+  overwriteBron = false,
+}) {
   if (!existsSync(srcJpg)) return { status: 'ontbreekt', src: srcJpg };
   mkdirSync(bronDir, { recursive: true });
   mkdirSync(dirname(outWebp), { recursive: true });
   const name = basename(srcJpg);
   const archief = join(bronDir, name);
-  if (!existsSync(archief)) copyFileSync(srcJpg, archief);
-  const kbVoor = kb(srcJpg);
-  toWebp(srcJpg, outWebp, width, height);
+  if (!existsSync(archief) || overwriteBron) copyFileSync(srcJpg, archief);
+  const bronFile = archief;
+  const kbVoor = kb(bronFile);
+  toWebp(bronFile, outWebp, width, height, fit);
   const kbNa = kb(outWebp);
-  if (removeJpgAfter && existsSync(srcJpg)) unlinkSync(srcJpg);
+  if (removeJpgAfter && existsSync(srcJpg) && srcJpg !== bronFile) unlinkSync(srcJpg);
   return {
-    bron: archief.replace(root + '\\', '').replaceAll('\\', '/'),
+    bron: bronFile.replace(root + '\\', '').replaceAll('\\', '/'),
     webp: outWebp.replace(root + '\\', '').replaceAll('\\', '/'),
     kbVoor,
     kbNa,
+    fit,
   };
+}
+
+const GK_BRON_EXT = ['.jpg', '.jpeg', '.png', '.webp'];
+
+function findGesprekskaartBron(bronDir, uitDir, code) {
+  for (const dir of [uitDir, bronDir]) {
+    for (const ext of GK_BRON_EXT) {
+      const p = join(dir, `${code}${ext}`);
+      if (!existsSync(p)) continue;
+      if (dir === uitDir && ext === '.webp') continue;
+      return { path: p, fromUit: dir === uitDir };
+    }
+  }
+  return null;
 }
 
 const report = { gesprekskaart: [], hulpvraag: [], vergader: [] };
@@ -51,28 +76,36 @@ const report = { gesprekskaart: [], hulpvraag: [], vergader: [] };
 if (runGk) {
   const uitDir = join(root, 'public', 'beelden', 'gesprekskaart');
   const bronDir = join(root, 'beelden-bron', 'gesprekskaart');
+  mkdirSync(uitDir, { recursive: true });
+  mkdirSync(bronDir, { recursive: true });
   for (const code of ['gk1', 'gk2', 'gk3', 'gk4', 'gk5']) {
-    const jpg = join(uitDir, `${code}.jpg`);
     const webp = join(uitDir, `${code}.webp`);
-    const src = existsSync(jpg) ? jpg : existsSync(join(bronDir, `${code}.jpg`)) ? join(bronDir, `${code}.jpg`) : null;
-    if (!src) {
+    const bron = findGesprekskaartBron(bronDir, uitDir, code);
+    if (!bron) {
       if (existsSync(webp)) report.gesprekskaart.push({ code, status: 'webp_al_aanwezig', kbNa: kb(webp) });
       else report.gesprekskaart.push({ code, status: 'ontbreekt' });
       continue;
     }
+    const kbBeforeWebp = existsSync(webp) ? kb(webp) : null;
     const row = archiveAndConvert({
-      srcJpg: src,
+      srcJpg: bron.path,
       bronDir,
       outWebp: webp,
-      width: 1200,
-      height: 1600,
-      removeJpgAfter: src.startsWith(uitDir),
+      width: 1600,
+      height: 900,
+      fit: 'inside',
+      removeJpgAfter: bron.fromUit,
+      overwriteBron: true,
     });
-    if (existsSync(jpg)) unlinkSync(jpg);
-    report.gesprekskaart.push({ code, ...row });
+    report.gesprekskaart.push({
+      code,
+      ...row,
+      kbWebpVoor: kbBeforeWebp,
+      crop: 'inside (geen cover)',
+    });
   }
   for (const name of readdirSync(uitDir)) {
-    if (name.toLowerCase().endsWith('.jpg')) unlinkSync(join(uitDir, name));
+    if (!/^gk[1-5]\.webp$/i.test(name)) unlinkSync(join(uitDir, name));
   }
 }
 

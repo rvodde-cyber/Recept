@@ -1,8 +1,13 @@
 # Voortgang Recept
 
-Laatst bijgewerkt: **25 november 2026** (branch `feat/recept-a1`, hulpvraag + VK webp).
+Laatst bijgewerkt: **25 november 2026** (branch `feat/recept-a1`, gesprekskaartbeelden 16:9).
 
 ## Afgerond in deze sessie
+
+- **Gesprekskaartbeelden liggend:** nieuwe bronnen `2688×1536` → `beelden-bron/gesprekskaart/`; webp 1600×900 inside; UI `aspect-ratio` 16/9; `scripts/verklein-beelden.mjs` aangepast.
+- **Gesprekskaart A1:** tweede alinea + alt (eerdere sessie).
+
+## Afgerond (eerder)
 
 - **Webp-batch:** `scripts/verklein-beelden.mjs` uitgebreid (`hulpvraag`, `vergader`, `gesprekskaart`); bron in `beelden-bron/hulpvraag/` en `beelden-bron/vergaderbeelden/`.
 - **Registers:** `HULPVRAAG_BEELD_EXT` → webp; nieuw `VERGADER_BEELD_EXT` + `vergaderBeeldUrl()`; `VergaderBeeld` geen harde `.jpg` meer.

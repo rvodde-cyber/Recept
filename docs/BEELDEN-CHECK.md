@@ -160,13 +160,13 @@ Register: `HULPVRAAG_BEELD_EXT` + `hulpvraagBeeldUrl()`. Omzetting: `node script
 
 | Code | Aflevering | Bestand | Afmeting | kB | Status |
 | --- | --- | --- | --- | --- | --- |
-| GK1 | A1 Het klusje voor Harrie | `public/beelden/gesprekskaart/gk1.webp` | 1200×1600 | 76 | geplaatst, akkoord Richard volgt |
-| GK2 | A2 Het gat in het loongebouw | `public/beelden/gesprekskaart/gk2.webp` | 1200×1600 | 93 | geplaatst, akkoord Richard volgt |
-| GK3 | A3 Topresultaten | `public/beelden/gesprekskaart/gk3.webp` | 1200×1600 | 149 | geplaatst, akkoord Richard volgt |
-| GK4 | A4 Het voorstel van IT | `public/beelden/gesprekskaart/gk4.webp` | 1200×1600 | 137 | geplaatst, akkoord Richard volgt |
-| GK5 | A5 De kantlijn | `public/beelden/gesprekskaart/gk5.webp` | 1200×1600 | 99 | geplaatst, akkoord Richard volgt |
+| GK1 | A1 Het klusje voor Harrie | `public/beelden/gesprekskaart/gk1.webp` | 16:9 UI; bron 2688×1536 (7:4) | 47 | geplaatst, akkoord Richard volgt |
+| GK2 | A2 Het gat in het loongebouw | `public/beelden/gesprekskaart/gk2.webp` | idem | 95 | geplaatst, akkoord Richard volgt |
+| GK3 | A3 Topresultaten | `public/beelden/gesprekskaart/gk3.webp` | idem | 105 | geplaatst, akkoord Richard volgt |
+| GK4 | A4 Het voorstel van IT | `public/beelden/gesprekskaart/gk4.webp` | idem | 48 | geplaatst, akkoord Richard volgt |
+| GK5 | A5 De kantlijn | `public/beelden/gesprekskaart/gk5.webp` | idem | 78 | geplaatst, akkoord Richard volgt |
 
-Bron-JPG: `beelden-bron/gesprekskaart/`. Omzetting: `node scripts/verklein-beelden.mjs` (npx sharp-cli). Register: `GESPREKSKAART_BEELD_EXT` → webp.
+Bron: `beelden-bron/gesprekskaart/gk*.jpg` (liggend). Omzetting: `node scripts/verklein-beelden.mjs gesprekskaart` — resize **inside** 1600×900, q80. Register: `GESPREKSKAART_BEELD_EXT` → webp. UI: CSS 16:9, `object-position` 50% 45%.
 
 ## WCAG
 

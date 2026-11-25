@@ -14,11 +14,11 @@ const A1: Gesprekskaart = {
   niveau: 'micro',
   sterren: 1,
   beeld: 'gk1',
-  alt: 'Gerrit draagt kratten in een café, terwijl Harrie bankbiljetten in zijn jaszak stopt. De eigenaar kijkt toe vanachter de bar.',
+  alt: 'Gerrit krijgt in een café bankbiljetten van de eigenaar en stopt ze in zijn jaszak. Naast hem staan kratten.',
   slotvraag: STANDAARD_SLOTVRAAG,
   alineas: [
     'Zaterdagmiddag vraagt Harrie aan Gerrit of hij even iets wil bezorgen: een paar extra kratten worstenbroodjes voor een café in Tilburg. "Een gunstje, Gerrit. Jij kent die man." Gerrit doet het graag; Harrie heeft hem de laatste maanden ook veel werk bezorgd.',
-    'Bij het café blijken het veel meer kratten dan afgesproken, en de eigenaar telt zeshonderd gulden in contanten uit. Geen bon, geen briefje. "Geef maar aan Harrie." Harrie stopt het geld in zijn jaszak. "Dat schrijven we later wel in het kasboek."',
+    'Bij het café blijken het veel meer kratten dan afgesproken, en de eigenaar telt zeshonderd gulden in contanten uit. Geen bon, geen briefje. "Geef maar aan Harrie." Gerrit stopt het geld in zijn jaszak. Als hij het \'s avonds aan Harrie geeft, zegt die: "Dat schrijven we later wel in het kasboek."',
     'Zondag ziet Gerrit hoe Lies het kasboek bijhoudt, regel voor regel. Dit bedrag staat er niet in. Het is niet de eerste keer. Volgende zaterdag vraagt Harrie hem hetzelfde nog eens. Doet Gerrit het weer, spreekt hij Harrie erop aan, of vertelt hij het aan Lies?',
   ],
 };

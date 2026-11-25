@@ -9,7 +9,7 @@ type Props = {
   tint: string;
 };
 
-/** Situatiebeeld onder de gesprekskaarttitel (1,74:1, register zonder 404). */
+/** Situatiebeeld onder de gesprekskaarttitel (16:9, register zonder 404). */
 export function GesprekskaartBeeld({ code, alt, tint }: Props) {
   const [failed, setFailed] = useState(false);
   const src = gesprekskaartBeeldUrl(code);
@@ -32,8 +32,8 @@ export function GesprekskaartBeeld({ code, alt, tint }: Props) {
               className="gesprekskaart-beeld__img"
               loading="lazy"
               decoding="async"
-              width={1740}
-              height={1000}
+              width={1600}
+              height={900}
               onError={() => setFailed(true)}
             />
             {tint !== 'transparent' ? (

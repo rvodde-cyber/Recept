@@ -1212,7 +1212,7 @@ select:focus-visible {
 .gesprekskaart-beeld__frame {
   position: relative;
   width: 100%;
-  aspect-ratio: 1.74 / 1;
+  aspect-ratio: 16 / 9;
   max-height: 32vh;
   border: 1px solid var(--line);
   border-radius: 4px;
@@ -1228,7 +1228,7 @@ select:focus-visible {
   height: 100%;
   max-height: inherit;
   object-fit: cover;
-  object-position: center;
+  object-position: 50% 45%;
 }
 .gesprekskaart-beeld__placeholder {
   width: 100%;

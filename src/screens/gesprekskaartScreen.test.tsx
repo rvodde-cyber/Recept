@@ -94,6 +94,14 @@ describe('GesprekskaartScherm — beeld', () => {
     vi.unstubAllGlobals();
   });
 
+  it('beeld: 16:9 vaste afmetingen op img', () => {
+    const { container, root } = render(1);
+    const img = container.querySelector('.gesprekskaart-beeld__img');
+    expect(img?.getAttribute('width')).toBe('1600');
+    expect(img?.getAttribute('height')).toBe('900');
+    act(() => root.unmount());
+  });
+
   it.each([1, 2, 3, 4, 5] as const)('(d) A%i: beeld tussen titel en eerste alinea', (ep) => {
     const { container, root } = render(ep);
     const titel = container.querySelector('h3.gk-titel');

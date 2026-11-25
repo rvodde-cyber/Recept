@@ -1,6 +1,6 @@
 # Gesprekskaarten — Recept
 
-Laatste update: **5 november 2026**. Bron teksten: `docs/claude-outputs/recept-gesprekskaarten-voorstel-05-11-2026.md`.
+Laatste update: **25 november 2026**. Bron teksten: `docs/claude-outputs/recept-gesprekskaarten-voorstel-05-11-2026.md`. **A1** (nov 2026): tweede alinea — Gerrit stopt het geld bij het café; Harries kasboekzin pas 's avonds (`data/gesprekskaarten.ts`).
 
 ## Plek in de flow
 
