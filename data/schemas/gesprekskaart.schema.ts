@@ -4,6 +4,9 @@ import type { EpisodeId } from '../episodes/meta';
 export const gesprekskaartNiveauSchema = z.enum(['micro', 'meso']);
 export const gesprekskaartSterrenSchema = z.union([z.literal(1), z.literal(2)]);
 
+export const gesprekskaartBeeldCodeSchema = z.enum(['gk1', 'gk2', 'gk3', 'gk4', 'gk5']);
+export type GesprekskaartBeeldCode = z.infer<typeof gesprekskaartBeeldCodeSchema>;
+
 export const gesprekskaartSchema = z.object({
   id: z.string().min(1),
   episode: z.union([z.literal(1), z.literal(2), z.literal(3), z.literal(4), z.literal(5)]),
@@ -12,6 +15,8 @@ export const gesprekskaartSchema = z.object({
   sterren: gesprekskaartSterrenSchema,
   alineas: z.array(z.string().min(1)).min(3),
   slotvraag: z.string().min(1),
+  beeld: gesprekskaartBeeldCodeSchema.optional(),
+  alt: z.string().min(1).optional(),
 });
 
 export type Gesprekskaart = z.infer<typeof gesprekskaartSchema>;

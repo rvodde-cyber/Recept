@@ -5,6 +5,7 @@ import { WAARDEN, GESPREK_ZIN_MAX, GESPREK_WAARDEN_MAX } from '@data/schemas/ges
 import { fieldMaxLength } from '../../game/limitsInput';
 import { PeriodThemeScope } from '../../components/PeriodThemeScope';
 import { ConceptDocentBanner } from '../../components/ConceptDocentBanner';
+import { GesprekskaartBeeld } from '../../components/GesprekskaartBeeld';
 import type { GameAction } from '../../game/gameReducer';
 import type { GameUiState } from '../../game/uiTypes';
 import { usePrefersReducedMotion } from '../../lib/prefersReducedMotion';
@@ -108,6 +109,9 @@ export function GesprekskaartPhase({
               </span>
             </p>
             <h3 className="gk-titel">{kaart.titel}</h3>
+            {kaart.beeld && kaart.alt ? (
+              <GesprekskaartBeeld code={kaart.beeld} alt={kaart.alt} tint={content.introLook.tint} />
+            ) : null}
             {kaart.alineas.map((p, i) => (
               <p key={i} className="body gk-alinea">
                 {p}

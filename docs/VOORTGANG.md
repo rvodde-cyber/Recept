@@ -1,8 +1,20 @@
 # Voortgang Recept
 
-Laatst bijgewerkt: **23 november 2026** (branch `feat/recept-a1`, hulpvraagkaart onderwijs).
+Laatst bijgewerkt: **25 november 2026** (branch `feat/recept-a1`, hulpvraag + VK webp).
 
 ## Afgerond in deze sessie
+
+- **Webp-batch:** `scripts/verklein-beelden.mjs` uitgebreid (`hulpvraag`, `vergader`, `gesprekskaart`); bron in `beelden-bron/hulpvraag/` en `beelden-bron/vergaderbeelden/`.
+- **Registers:** `HULPVRAAG_BEELD_EXT` → webp; nieuw `VERGADER_BEELD_EXT` + `vergaderBeeldUrl()`; `VergaderBeeld` geen harde `.jpg` meer.
+- **Kopieën:** `hulpvraag - kopie/`, `h4/h5 - kopie.jpg` verwijderd (identiek, geen verwijzingen).
+- **public/beelden:** ~30 MB → ~13 MB; portretten/trailers alleen gemeten, niet gewijzigd.
+
+## Afgerond (eerder)
+
+- **Gesprekskaart-beeld:** velden `beeld` + `alt`; `GesprekskaartBeeld`; tests scherm + engine.
+- **Documentatie:** `docs/beeldbank-codes.md` (GK1–GK5), `docs/BEELDEN-CHECK.md`, `docs/DESIGNGIDS.md`.
+
+## Afgerond (eerder)
 
 - **Openingsscène (deel A+B):** nieuwe kolomindeling in `ColdPhase` — vergaderbeeld (VK1–VK5), blok Hardop, blok Onder tafel; tempo-uitleg verplaatst naar `SceneBriefing` onder **Start de scène**; bedieningsrij Sneller / Pauze / Stop.
 - **Register:** `vergaderBeeld` + `vergaderBeeldAlt` in `data/episodes/content.ts`.
@@ -11,7 +23,7 @@ Laatst bijgewerkt: **23 november 2026** (branch `feat/recept-a1`, hulpvraagkaart
 - **Documentatie:** `docs/DESIGNGIDS.md` §10b, `docs/beeldbank-codes.md`, `docs/BEELDEN-CHECK.md`.
 - **Tests:** `src/screens/coldPhaseLayout.test.tsx`, `engine/__tests__/coldOpenOnderstroom.test.ts`, `coldOpenFlow.test.ts`.
 - **Vraagregel cold open:** `vraagregels` + `vraagregelActief`; familievraag als laatste hardop (A4 achter vlag uit).
-- **Hulpvraagkaart (onderwijs):** `content/hulpvraag.nl.ts`, `HulpvraagPhase`, schakelaar docent (`onderwijsSettings`), na pauzekaart; export `hulpvraag`; beelden `public/beelden/hulpvraag/h1–h5.jpg`.
+- **Hulpvraagkaart (onderwijs):** `content/hulpvraag.nl.ts`, `HulpvraagPhase`, schakelaar docent (`onderwijsSettings`), na pauzekaart; export `hulpvraag`; beelden `public/beelden/hulpvraag/h1–h5.webp`.
 
 ## Open voor Richard
 

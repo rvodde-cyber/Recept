@@ -22,11 +22,11 @@ export type HulpvraagItem = {
 
 /** Beschikbare extensie per code; .webp wint bij beide (handmatig/registry). Geen netwerk-probe. */
 export const HULPVRAAG_BEELD_EXT: Record<HulpvraagBeeldCode, 'webp' | 'jpg' | null> = {
-  h1: 'jpg',
-  h2: 'jpg',
-  h3: 'jpg',
-  h4: 'jpg',
-  h5: 'jpg',
+  h1: 'webp',
+  h2: 'webp',
+  h3: 'webp',
+  h4: 'webp',
+  h5: 'webp',
 };
 
 export const HULPVRAAG_REFLECTIE =

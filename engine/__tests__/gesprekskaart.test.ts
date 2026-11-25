@@ -1,4 +1,6 @@
 import { describe, expect, it } from 'vitest';
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
 import { EPISODE_CONTENT } from '@data/episodes/content';
 import { GESPREKSKAARTEN, gesprekskaartVoor } from '@data/gesprekskaarten';
 import {
@@ -7,6 +9,11 @@ import {
   WAARDEN,
   gesprekskaartSchema,
 } from '@data/schemas/gesprekskaart.schema';
+import { GESPREKSKAART_BEELD_EXT } from '../../src/game/gesprekskaartBeeldRegistry';
+import {
+  gesprekskaartBeeldUrl,
+  gesprekskaartBeeldUrlWithRegistry,
+} from '../../src/game/gesprekskaartBeeld';
 import { freshEpisode } from '../../src/game/budgetUi';
 import { gameReducer } from '../../src/game/gameReducer';
 import { buildTeamExport } from '../../src/game/teamExport';
@@ -39,6 +46,37 @@ describe('gesprekskaarten register', () => {
     expect(k.alineas[0]).toContain('Dongen');
     expect(k.alineas[2]).toContain('Wat doet Mark?');
     expect(k.alineas.join(' ')).not.toMatch(/topresultaten waard/i);
+  });
+
+  it.each([1, 2, 3, 4, 5] as const)('(a) aflevering %i: beeldcode en niet-lege alt', (ep) => {
+    const k = gesprekskaartVoor(ep);
+    expect(k.beeld).toMatch(/^gk[1-5]$/);
+    expect(k.alt?.trim().length).toBeGreaterThan(10);
+  });
+});
+
+describe('gesprekskaart — beelden', () => {
+  it('(b) ontbrekend in register: geen URL', () => {
+    expect(gesprekskaartBeeldUrlWithRegistry('gk1', { ...GESPREKSKAART_BEELD_EXT, gk1: null })).toBeNull();
+  });
+
+  it('(c) webp wint op jpg in register', () => {
+    const url = gesprekskaartBeeldUrlWithRegistry('gk1', { ...GESPREKSKAART_BEELD_EXT, gk1: 'webp' });
+    expect(url).toContain('gk1.webp');
+    expect(gesprekskaartBeeldUrl('gk1')).toContain('gk1.webp');
+  });
+
+  it.each(['gk1', 'gk2', 'gk3', 'gk4', 'gk5'] as const)('register %s heeft webp', (code) => {
+    expect(GESPREKSKAART_BEELD_EXT[code]).toBe('webp');
+  });
+
+  it.each(['gk1', 'gk2', 'gk3', 'gk4', 'gk5'] as const)('bestand %s: eerst .webp dan .jpg op schijf', (code) => {
+    const root = join(process.cwd(), 'public', 'beelden', 'gesprekskaart');
+    const webp = existsSync(join(root, `${code}.webp`));
+    const jpg = existsSync(join(root, `${code}.jpg`));
+    if (webp) expect(GESPREKSKAART_BEELD_EXT[code]).toBe('webp');
+    else if (jpg) expect(GESPREKSKAART_BEELD_EXT[code]).toBe('jpg');
+    else expect(GESPREKSKAART_BEELD_EXT[code]).toBeNull();
   });
 });
 

@@ -6,7 +6,7 @@ Laatste update: **6 november 2026** (intro-kaders + intro-split scroll). Afgelei
 
 **Typografie:** per tijdperk — `docs/TYPOGRAFIE.md`, `themes/periods.ts`, `PeriodTypographyScope`.
 
-**Gesprekskaarten:** teamgesprek ronde 1 — `docs/GESPREKSKAART.md`, fase `gesprek`, geen motoreffect.
+**Gesprekskaarten:** teamgesprek ronde 1 — `docs/GESPREKSKAART.md`, fase `gesprek`, geen motoreffect. Beeld bij de gesprekskaart toont de situatie en niet het antwoord, zonder tekst, direct onder de titel (`GesprekskaartBeeld`, register `public/beelden/gesprekskaart/`).
 
 **Landingspagina & intro:** posterlook — hoofdstuk **§9** hieronder; beeld rechts via `introBeeldRechts` in `EPISODE_CONTENT`.
 

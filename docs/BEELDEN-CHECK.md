@@ -34,18 +34,18 @@ Voor `introBeeldRechts` zet het register **`introBeeldFocus`** (`{ x, y }` in pr
 
 | Code | Gebruik in UI | Bestand | Alt (register) | Status |
 | --- | --- | --- | --- | --- |
-| VK1 | A1 ronde 1 | `public/beelden/VK1.jpg` | `vergaderBeeldAlt` ep1 | **te maken door Richard** |
-| VK1-2 | A1 ronde 2 | `public/beelden/VK1-2.jpg` | `vergaderBeeld.altRonde2` ep1 | **te maken door Richard** |
-| VK2-1 | A2 ronde 1 | `public/beelden/VK2-1.jpg` | `vergaderBeeld.altRonde1` ep2 | **te maken door Richard** |
-| VK2 | A2 ronde 2 | `public/beelden/VK2.jpg` | `vergaderBeeldAlt` ep2 | **te maken door Richard** |
-| VK3 | A3 ronde 1 en 2 | `public/beelden/VK3.jpg` | `vergaderBeeldAlt` ep3 | **te maken door Richard** |
-| VK4-1 | A4 ronde 1 | `public/beelden/VK4-1.jpg` | `vergaderBeeld.altRonde1` ep4 | **te maken door Richard** |
-| VK4-2 | A4 ronde 2 | `public/beelden/VK4-2.jpg` | `vergaderBeeld.altRonde2` ep4 | **te maken door Richard** |
-| VK5-1 | A5 ronde 1 | `public/beelden/VK5-1.jpg` | `vergaderBeeld.altRonde1` ep5 | **te maken door Richard** |
-| VK5 | A5 ronde 2 | `public/beelden/VK5.jpg` | `vergaderBeeldAlt` ep5 | **te maken door Richard** |
-| VK4 | *(niet meer in UI; vervangen door VK4-2)* | `public/beelden/VK4.jpg` | was MT-vergaderruimte — bestand mag blijven liggen | archief |
+| VK1 | A1 ronde 1 | `public/beelden/VK1.webp` (112 kB) | `vergaderBeeldAlt` ep1 | **geplaatst, akkoord Richard volgt** |
+| VK1-2 | A1 ronde 2 | `public/beelden/VK1-2.webp` (155 kB) | `vergaderBeeld.altRonde2` ep1 | **geplaatst, akkoord Richard volgt** |
+| VK2-1 | A2 ronde 1 | `public/beelden/VK2-1.webp` (141 kB) | `vergaderBeeld.altRonde1` ep2 | **geplaatst, akkoord Richard volgt** |
+| VK2 | A2 ronde 2 | `public/beelden/VK2.webp` (107 kB) | `vergaderBeeldAlt` ep2 | **geplaatst, akkoord Richard volgt** |
+| VK3 | A3 ronde 1 en 2 | `public/beelden/VK3.webp` (84 kB) | `vergaderBeeldAlt` ep3 | **geplaatst, akkoord Richard volgt** |
+| VK4-1 | A4 ronde 1 | `public/beelden/VK4-1.webp` (160 kB) | `vergaderBeeld.altRonde1` ep4 | **geplaatst, akkoord Richard volgt** |
+| VK4-2 | A4 ronde 2 | `public/beelden/VK4-2.webp` (152 kB) | `vergaderBeeld.altRonde2` ep4 | **geplaatst, akkoord Richard volgt** |
+| VK5-1 | A5 ronde 1 | `public/beelden/VK5-1.webp` (44 kB) | `vergaderBeeld.altRonde1` ep5 | **geplaatst, akkoord Richard volgt** |
+| VK5 | A5 ronde 2 | `public/beelden/VK5.webp` (52 kB) | `vergaderBeeldAlt` ep5 | **geplaatst, akkoord Richard volgt** |
+| VK4 | archief | `public/beelden/VK4.webp` (96 kB) | niet in UI | archief |
 
-App laadt JPG direct; geen `akkoordRichard`-gate. Codes per ronde: `EPISODE_CONTENT` → `vergaderBeeld.ronde1` / `ronde2`.
+Bron-JPG: `beelden-bron/vergaderbeelden/`. Register: `VERGADER_BEELD_EXT` + `vergaderBeeldUrl()` (.webp, jpg fallback via register). Omzetting: `node scripts/verklein-beelden.mjs vergader`.
 
 ## UI — nog te leveren of te verbeteren (6 nov 2026)
 
@@ -143,6 +143,30 @@ Richard: inhoud akkoord Firefly nog open. **T1, TR2-3, TR4-2, TR5-1, TR5-4** bov
 | Naam | `P-ANNEFLEUR-2036` → hernoemd naar **`P-ANNE-FLEUR-2036.jpg`** (register) |
 | Originelen | `public/.../_origineel` → **`beelden-bron/portretten-origineel/`** (gitignore) |
 | Akkoord Richard | nog **nee** per bestand |
+
+## Hulpvraag — h1–h5 (nov 2026)
+
+| Code | Bestand | kB (webp) | Bron |
+| --- | --- | --- | --- |
+| h1 | `public/beelden/hulpvraag/h1.webp` | 60 | `beelden-bron/hulpvraag/h1.jpg` |
+| h2 | `public/beelden/hulpvraag/h2.webp` | 100 | `beelden-bron/hulpvraag/h2.jpg` |
+| h3 | `public/beelden/hulpvraag/h3.webp` | 142 | `beelden-bron/hulpvraag/h3.jpg` |
+| h4 | `public/beelden/hulpvraag/h4.webp` | 129 | `beelden-bron/hulpvraag/h4.jpg` |
+| h5 | `public/beelden/hulpvraag/h5.webp` | 88 | `beelden-bron/hulpvraag/h5.jpg` |
+
+Register: `HULPVRAAG_BEELD_EXT` + `hulpvraagBeeldUrl()`. Omzetting: `node scripts/verklein-beelden.mjs hulpvraag`.
+
+## Gesprekskaart — GK1–GK5 (dual coding, nov 2026)
+
+| Code | Aflevering | Bestand | Afmeting | kB | Status |
+| --- | --- | --- | --- | --- | --- |
+| GK1 | A1 Het klusje voor Harrie | `public/beelden/gesprekskaart/gk1.webp` | 1200×1600 | 76 | geplaatst, akkoord Richard volgt |
+| GK2 | A2 Het gat in het loongebouw | `public/beelden/gesprekskaart/gk2.webp` | 1200×1600 | 93 | geplaatst, akkoord Richard volgt |
+| GK3 | A3 Topresultaten | `public/beelden/gesprekskaart/gk3.webp` | 1200×1600 | 149 | geplaatst, akkoord Richard volgt |
+| GK4 | A4 Het voorstel van IT | `public/beelden/gesprekskaart/gk4.webp` | 1200×1600 | 137 | geplaatst, akkoord Richard volgt |
+| GK5 | A5 De kantlijn | `public/beelden/gesprekskaart/gk5.webp` | 1200×1600 | 99 | geplaatst, akkoord Richard volgt |
+
+Bron-JPG: `beelden-bron/gesprekskaart/`. Omzetting: `node scripts/verklein-beelden.mjs` (npx sharp-cli). Register: `GESPREKSKAART_BEELD_EXT` → webp.
 
 ## WCAG
 

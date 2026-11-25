@@ -26,6 +26,7 @@ De volledige Firefly-prompts staan in het ontwerpdocument; Cursor heeft alleen d
 | Locaties en objecten | L1 het schrift, L2 de bestuurskamer, L3 dashboardachtergrond schuur, L4 dashboardachtergrond conglomeraat |
 | Tijdgeest — Renault 5 (rode draad) | **RENAULT-84**, **RENAULT-96**, **RENAULT-09**, **RENAULT-26**, **RENAULT-36** — prompts in `docs/TIJDGEEST.md` |
 | Tijdgeest — rekwisieten | **REKW-84-CASSETTE**, **REKW-84-TELEFOON**, **REKW-96-PC**, **REKW-96-SEMAFOON**, **REKW-09-BLACKBERRY**, **REKW-09-HYVES**, **REKW-09-WII**, **REKW-26-PADEL**, **REKW-26-SMARTWATCH**, **REKW-36-BEZORG** — prompts in `docs/TIJDGEEST.md` |
+| Gesprekskaart ronde 1 (dual coding) | **GK1**–**GK5** → `public/beelden/gesprekskaart/gk1.webp` (of `.jpg`); 3:4 bron, UI crop 1,74:1 |
 | Aflevering 1 (1984, nieuw) | **A1-BRIEFJE** — briefje tussen kasboekpagina's; **A1-SCHRIFT** — twee handschriften op één pagina (slot close-up) |
 | Aanvullend in de demo | MENU, I4, X1, Y1, R2, D1, PIOTR (zie `referentie/beelden/`) |
 

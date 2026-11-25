@@ -1,5 +1,7 @@
 /** @vitest-environment jsdom */
 import { describe, expect, it, afterEach } from 'vitest';
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
 import {
   HULPVRAAG_REFLECTIE,
   HULPVRAAG_BEELD_EXT,
@@ -100,6 +102,15 @@ describe('hulpvraag — beelden', () => {
   it('(l) .webp vóór .jpg in registry', () => {
     const url = hulpvraagBeeldUrlWithRegistry('h1', { ...HULPVRAAG_BEELD_EXT, h1: 'webp' });
     expect(url).toContain('h1.webp');
-    expect(hulpvraagBeeldUrl('h1')).toContain('h1.jpg');
+    expect(hulpvraagBeeldUrl('h1')).toContain('h1.webp');
+    const jpgFallback = hulpvraagBeeldUrlWithRegistry('h1', { ...HULPVRAAG_BEELD_EXT, h1: 'jpg' });
+    expect(jpgFallback).toContain('h1.jpg');
+  });
+
+  it.each(['h1', 'h2', 'h3', 'h4', 'h5'] as const)('bestand %s: registry sluit aan op schijf', (code) => {
+    const root = join(process.cwd(), 'public', 'beelden', 'hulpvraag');
+    if (existsSync(join(root, `${code}.webp`))) expect(HULPVRAAG_BEELD_EXT[code]).toBe('webp');
+    else if (existsSync(join(root, `${code}.jpg`))) expect(HULPVRAAG_BEELD_EXT[code]).toBe('jpg');
+    else expect(HULPVRAAG_BEELD_EXT[code]).toBeNull();
   });
 });

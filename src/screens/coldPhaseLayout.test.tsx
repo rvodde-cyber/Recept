@@ -98,7 +98,7 @@ describe('openingsscène — indeling A1', () => {
 
   it('(a) vergaderbeeld met juiste VK-code en plaatsaanduiding bij ontbrekend bestand', () => {
     const c = render(sceneState(1, 1));
-    expect(c.querySelector('.vergader-beeld__img')?.getAttribute('src')).toContain('VK1.jpg');
+    expect(c.querySelector('.vergader-beeld__img')?.getAttribute('src')).toContain('VK1.webp');
     const img = c.querySelector<HTMLImageElement>('.vergader-beeld__img');
     act(() => img?.dispatchEvent(new Event('error')));
     expect(c.textContent).toContain('BEELD VK1 VOLGT');
@@ -182,7 +182,7 @@ describe('openingsscène — indeling A1', () => {
       expect(vergaderBeeldFileCode(ep, round)).toBe(code);
       const c = render(sceneState(ep, round));
       const src = c.querySelector('.vergader-beeld__img')?.getAttribute('src') ?? '';
-      expect(src).toContain(`${code}.jpg`);
+      expect(src).toContain(`${code}.webp`);
       expect(c.querySelector('.vergader-beeld__img')?.getAttribute('alt')).toBe(
         vergaderBeeldAltText(ep, round),
       );
@@ -211,7 +211,8 @@ describe('openingsscène — register', () => {
         </UiModalsProvider>,
       );
     });
-    expect(container.querySelector('.vergader-beeld__img')?.getAttribute('src')).toContain('VK9-TEST.jpg');
+    expect(container.textContent).toContain('BEELD VK9-TEST VOLGT');
+    expect(container.querySelector('.vergader-beeld__img')).toBeNull();
     EPISODE_CONTENT[1].vergaderBeeld = orig;
     act(() => root!.unmount());
     container.remove();

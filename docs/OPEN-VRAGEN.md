@@ -7,5 +7,6 @@
 | 3 | Ronde-specifieke VK | Standaard zelfde code r1/r2; later per ronde andere code indien gewenst. | register klaar |
 | 4 | Docs onderstroom A4 | `docs/ONDERSTROOM.md` en `DESIGNGIDS.md` vermelden nog «A4 uit»; inhoudelijk verouderd na `onderstroomActief: true`. | opschonen wanneer Richard wil |
 | 5 | Hulpvraag-beelden | h1–h3 volgens opdracht; h4/h5 staan als JPG in repo; eventueel .webp aanleveren (webp wint in register). | inhoudRichard |
+| 8 | Gesprekskaart-beelden GK1–GK5 | JPG in repo (>200 kB elk); inhoudelijk akkoord en optioneel .webp/compressie. | geplaatst, akkoord Richard volgt |
 | 6 | Recept/docs | Geen aparte map `Recept/docs/`; alles in `docs/`. | — |
 | 7 | Vraagregel A4 | Teksten in register; standaard `vraagregelActief: false` (demo-golden). | Richard beslist wanneer aan |

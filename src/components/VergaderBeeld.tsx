@@ -1,6 +1,5 @@
 import { useState } from 'react';
-
-const base = import.meta.env.BASE_URL;
+import { vergaderBeeldUrl } from '../game/vergaderBeeld';
 
 type Props = {
   code: string;
@@ -13,17 +12,18 @@ type Props = {
 /** Vergaderbeeld bovenaan de openingsscène (3:2, VK-codes). */
 export function VergaderBeeld({ code, alt, caption, tint }: Props) {
   const [failed, setFailed] = useState(false);
+  const src = vergaderBeeldUrl(code);
 
   return (
     <figure className="vergader-beeld">
       <div className="vergader-beeld__frame">
-        {failed ? (
+        {!src || failed ? (
           <div className="vergader-beeld__placeholder" role="img" aria-label={alt}>
             BEELD {code} VOLGT
           </div>
         ) : (
           <img
-            src={`${base}beelden/${code}.jpg`}
+            src={src}
             alt={alt}
             className="vergader-beeld__img"
             loading="eager"

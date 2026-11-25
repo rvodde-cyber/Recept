@@ -13,6 +13,8 @@ const A1: Gesprekskaart = {
   titel: 'Het klusje voor Harrie',
   niveau: 'micro',
   sterren: 1,
+  beeld: 'gk1',
+  alt: 'Gerrit draagt kratten in een café, terwijl Harrie bankbiljetten in zijn jaszak stopt. De eigenaar kijkt toe vanachter de bar.',
   slotvraag: STANDAARD_SLOTVRAAG,
   alineas: [
     'Zaterdagmiddag vraagt Harrie aan Gerrit of hij even iets wil bezorgen: een paar extra kratten worstenbroodjes voor een café in Tilburg. "Een gunstje, Gerrit. Jij kent die man." Gerrit doet het graag; Harrie heeft hem de laatste maanden ook veel werk bezorgd.',
@@ -27,6 +29,8 @@ const A2: Gesprekskaart = {
   titel: 'Het gat in het loongebouw',
   niveau: 'meso',
   sterren: 2,
+  beeld: 'gk2',
+  alt: 'Ingrid belt aan een bureau vol loonstroken. Achter het raam werkt Truus rustig aan de planning bij de productielijn.',
   slotvraag: STANDAARD_SLOTVRAAG,
   alineas: [
     'Ingrid heeft haar eerste baan bij personeelszaken van Van Gorp. Het bedrijf groeit snel en ze brengt in kaart wie wat doet en wat iedereen verdient. Het is een rommeltje: dezelfde functies, verschillende lonen.',
@@ -41,6 +45,8 @@ const A3: Gesprekskaart = {
   titel: 'Topresultaten',
   niveau: 'meso',
   sterren: 2,
+  beeld: 'gk3',
+  alt: 'Mark zit aan zijn bureau en kijkt naar een grafiek met één hoge en twee lage balken.',
   slotvraag: STANDAARD_SLOTVRAAG,
   alineas: [
     'Saskia werkt in Dongen. Voor de derde keer in korte tijd meldt ze zich ziek. In het verzuimgesprek met Mark, HR-adviseur op het hoofdkantoor in Tilburg, komt het eruit: te veel werk, voortdurend spanning en een leidinggevende die iedereen opjaagt. "Ik trek het even niet meer. En ik ben echt niet de enige."',
@@ -55,6 +61,8 @@ const A4: Gesprekskaart = {
   titel: 'Het voorstel van IT',
   niveau: 'meso',
   sterren: 2,
+  beeld: 'gk4',
+  alt: "Yasmin zit achter haar laptop voor een leeg document met een knipperende cursor. Op de gang praten twee collega's zacht met elkaar.",
   slotvraag: STANDAARD_SLOTVRAAG,
   alineas: [
     'IT wil PILOT uitbreiden naar de staf: software die toetsaanslagen en actieve vensters bijhoudt, om onderpresteerders vroeg te signaleren. Yasmin, HR-manager, moet vrijdag adviseren. Twee medewerkers presteren al maanden onder, zonder duidelijke reden.',
@@ -69,6 +77,8 @@ const A5: Gesprekskaart = {
   titel: 'De kantlijn',
   niveau: 'meso',
   sterren: 2,
+  beeld: 'gk5',
+  alt: 'Ria houdt een oud vel papier met potloodaantekeningen in de kantlijn vast. Naast haar toont een glazen scherm dezelfde pagina zonder aantekeningen.',
   slotvraag: STANDAARD_SLOTVRAAG,
   alineas: [
     'Ria is tweeënzestig en beheert al eenendertig jaar het archief met de oorspronkelijke recepten en werkinstructies van het bedrijf, op papier en volgens haar eigen systeem. Alles is inmiddels gedigitaliseerd en het AI-systeem vindt in een seconde wat zij in een minuut vindt.',
