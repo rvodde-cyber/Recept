@@ -10,6 +10,7 @@ import { UitlegScreen } from './screens/UitlegScreen';
 import { PosterTypographyScope } from './components/PosterTypographyScope';
 import type { UitlegOrigin } from './context/UiModalsContext';
 import { useUiModals } from './context/UiModalsContext';
+import { ViewReset } from './components/ViewReset';
 
 function UitlegWithModals({
   episodeHint,
@@ -46,6 +47,12 @@ export default function App() {
     }
   };
 
+  const viewKey = uitlegFrom
+    ? `uitleg:${uitlegFrom}`
+    : !playing
+      ? 'home'
+      : `game:${state.episode}:${state.round}:${state.phase}`;
+
   return (
     <UiModalsProvider
       onExitMenu={() => setPlaying(false)}
@@ -53,6 +60,7 @@ export default function App() {
       gameState={playing ? state : null}
       gameDispatch={playing ? dispatchGame : undefined}
     >
+      <ViewReset viewKey={viewKey} />
       {uitlegFrom ? (
         <PosterTypographyScope className="landing-typography">
           <UitlegWithModals

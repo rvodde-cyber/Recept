@@ -8,9 +8,23 @@ Laatste update: **6 november 2026** (intro-kaders + intro-split scroll). Afgelei
 
 **Gesprekskaarten:** teamgesprek ronde 1 — `docs/GESPREKSKAART.md`, fase `gesprek`, geen motoreffect. Beeld bij de gesprekskaart toont de situatie en niet het antwoord, zonder tekst, direct onder de titel (`GesprekskaartBeeld`, register `public/beelden/gesprekskaart/`).
 
+## Beelden: breedte begrenzen, niet de hoogte (nov 2026)
+
+Situatiebeelden worden **niet** meer via `max-height` in vh afgesneden. Verhouding blijft intact (`aspect-ratio`); **breedte** wordt begrensd zodat het beeld op het scherm past, `height: auto`, gecentreerd met `margin-inline: auto`.
+
+| Soort | Verhouding | CSS-frame |
+| --- | --- | --- |
+| Gesprekskaart | 16:9 | `width: min(100%, calc(46vh * 16 / 9))`; `object-fit: cover`; `object-position: 50% 35%`; kolom `gesprek-wrap` max **720px** |
+| Vergader (VK) | 3:2 | `width: min(100%, 1100px, calc(42vh * 3 / 2))`; in `cold-scene-shell` max **1100px** |
+| Hulpvraag | 3:4 (staand, `cover` in liggend kader) | `max-width: 420px`; alleen `object-position: 50% 25%` (gezichten hoger) — geen verhoudingswijziging tot besluit in content |
+
 **Landingspagina & intro:** posterlook — hoofdstuk **§9** hieronder; beeld rechts via `introBeeldRechts` in `EPISODE_CONTENT`.
 
 **Uitleg en spelregels:** volledig scherm in posterlook — hoofdstuk **§9b**; teksten in `content/uitleg.ts`, UI `src/screens/UitlegScreen.tsx`.
+
+## Scroll en focus (nov 2026)
+
+Elk scherm opent **bovenaan**: bij wissel van landingspagina, uitleg, aflevering, ronde of fase zet `ViewReset` (`useViewResetOnChange`) `window` en vaste scrollcontainers (o.a. `.cold-scene-shell`, `#cine`) op `scrollTop` 0; `history.scrollRestoration = manual`. Focus gaat naar de eerste zichtbare kop (`h1`–`h4`, niet `sr-only`, niet in `header.top`) met `preventScroll`. **Uitzondering:** binnen de openingsscène blijft `scrollIntoView` naar nieuwe regels in het scèneblok; hulpvraag-opdracht scrollt intern na de knop — geen reset op timer, chips of modals.
 
 ## 1. Principes
 

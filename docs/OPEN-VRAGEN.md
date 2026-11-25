@@ -10,3 +10,4 @@
 | 8 | Gesprekskaart-beelden GK1–GK5 | JPG in repo (>200 kB elk); inhoudelijk akkoord en optioneel .webp/compressie. | geplaatst, akkoord Richard volgt |
 | 6 | Recept/docs | Geen aparte map `Recept/docs/`; alles in `docs/`. | — |
 | 7 | Vraagregel A4 | Teksten in register; standaard `vraagregelActief: false` (demo-golden). | Richard beslist wanneer aan |
+| 9 | Scroll per scherm | Landingspagina → fasewissel: bovenaan (`ViewReset`, nov 2026). | **opgelost in build** |

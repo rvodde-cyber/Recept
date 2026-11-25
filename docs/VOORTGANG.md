@@ -1,11 +1,12 @@
 # Voortgang Recept
 
-Laatst bijgewerkt: **25 november 2026** (branch `feat/recept-a1`, gesprekskaartbeelden 16:9).
+Laatst bijgewerkt: **25 november 2026** (branch `feat/recept-a1`, beeld-CSS breedte i.p.v. max-height).
 
 ## Afgerond in deze sessie
 
-- **Gesprekskaartbeelden liggend:** nieuwe bronnen `2688×1536` → `beelden-bron/gesprekskaart/`; webp 1600×900 inside; UI `aspect-ratio` 16/9; `scripts/verklein-beelden.mjs` aangepast.
-- **Gesprekskaart A1:** tweede alinea + alt (eerdere sessie).
+- **Beeldweergave:** gesprekskaart (16:9) en vergader/VK (3:2) zonder `max-height`; breedte via `min(100%, vh)`; hulpvraag `object-position: 50% 25%`; tests `engine/__tests__/faseBeeldCss.test.ts`; `DESIGNGIDS` § beelden.
+- **Scroll-reset:** `ViewReset` + `scrollToTop` / `focusScreenHeading`; viewKey op aflevering, ronde, fase, home en uitleg; openingsscène-autoscroll ongewijzigd (`DESIGNGIDS` § scroll).
+- **Gesprekskaartbeelden liggend** (eerdere sessie); **A1-tekst** (eerdere sessie).
 
 ## Afgerond (eerder)
 
