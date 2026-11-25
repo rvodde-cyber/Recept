@@ -1,10 +1,11 @@
 # Voortgang Recept
 
-Laatst bijgewerkt: **25 november 2026** (branch `feat/recept-a1`, controle A1-tekst + beeld-CSS + scroll).
+Laatst bijgewerkt: **25 november 2026** (branch `feat/recept-a1`, controle A1 + scroll).
 
 ## Afgerond in deze sessie
 
-- **Controle (geen codewijziging nodig):** A1 alinea 2 + `gk1`-alt in `data/gesprekskaarten.ts` conform spec; `recept.css` beelden breedte-begrensd zonder `max-height`; scroll-reset via `ViewReset` in `App.tsx` + test `src/lib/scrollToTop.test.tsx`. Tests + build opnieuw groen.
+- **Controle (geen codewijziging):** A1 alinea 2 + gk1-alt conform spec in `data/gesprekskaarten.ts`; scroll bovenaan via centrale `ViewReset` / `viewKey` in `App.tsx`, test `src/lib/scrollToTop.test.tsx` (`scrollTo` top 0). Tests + build groen.
+- **Controle eerdere pass:** beeld-CSS zonder max-height; zie regels hieronder.
 - **Beeldweergave:** gesprekskaart (16:9) en vergader/VK (3:2) zonder `max-height`; breedte via `min(100%, vh)`; hulpvraag `object-position: 50% 25%`; tests `engine/__tests__/faseBeeldCss.test.ts`; `DESIGNGIDS` § beelden.
 - **Scroll-reset:** `ViewReset` + `scrollToTop` / `focusScreenHeading`; viewKey op aflevering, ronde, fase, home en uitleg; openingsscène-autoscroll ongewijzigd (`DESIGNGIDS` § scroll).
 - **Gesprekskaartbeelden liggend** (eerdere sessie); **A1-tekst** (eerdere sessie).
