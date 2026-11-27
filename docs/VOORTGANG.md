@@ -1,8 +1,12 @@
 # Voortgang Recept
 
-Laatst bijgewerkt: **27 november 2026** (branch `feat/recept-a1`, restpunten opmerkingenbundel).
+Laatst bijgewerkt: **27 november 2026** (terugblik / spiegelfeedback).
 
 ## Afgerond in deze sessie
+
+- **Terugblik:** fase na slotfilm, regels + tests, team/docent/export, reeksterugblik op landingspagina; zie `docs/TERUGBLIK.md`.
+
+## Afgerond (eerdere sessie 27 nov)
 
 - **Stap 1:** gesprekskaart A3 en A4 r2 `hintRonde2` gecontroleerd — al conform spec (`data/gesprekskaarten.ts`, `content/intros.nl.ts`).
 - **Stap 2:** Marco 30/47/57 in `data/personen.ts`; serieconcept + `docs/PORTRETTEN-LIJST.md`; Harrie 54 in 2009 al overal (geen code-66). Test `engine/__tests__/personenLeeftijd.test.ts`.

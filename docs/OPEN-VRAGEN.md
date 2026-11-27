@@ -11,6 +11,9 @@
 | 6 | Recept/docs | Geen aparte map `Recept/docs/`; alles in `docs/`. | — |
 | 7 | Vraagregel A4 | Teksten in register; standaard `vraagregelActief: false` (demo-golden). | Richard beslist wanneer aan |
 | 9 | Scroll per scherm | Landingspagina → fasewissel: bovenaan (`ViewReset`, nov 2026). | **opgelost in build** |
+| 10 | Terugblik teksten en drempels | Richard beoordeelt na speeltest (`KANT_DREMPEL_MIN`, symmetrie, A4-kaartkanten). | wacht speeltest |
+| 11 | Terugblik ↔ DID | Koppeling patroon aan Zien–Voelen–Wegen–Handelen–Volhouden (later). | open |
+| 12 | Terugblik over apparaten | Alleen localStorage; geen sync tussen toestellen. | bewuste keuze nov 2026 |
 
 ## Orakeltoon, te beoordelen door Richard
 
