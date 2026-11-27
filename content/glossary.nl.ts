@@ -32,4 +32,12 @@ export const BEGRIPPEN: Begrip[] = [
     term: 'Begroting',
     uitleg: 'Het geld dat jullie deze ronde mogen verdelen. Marco’s voorstel is het startpunt: jullie mogen het aanpassen.',
   },
+  {
+    term: 'Eerlijkheid',
+    uitleg: 'Werden mensen gelijk behandeld, en golden de afspraken voor iedereen?',
+  },
+  {
+    term: 'Menselijke maat',
+    uitleg: 'Kreeg de mens achter de maatregel ruimte om gehoord te worden?',
+  },
 ];

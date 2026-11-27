@@ -21,6 +21,7 @@ export type Phase =
   | 'opvolging'
   | 'pauze'
   | 'hulpvraag'
+  | 'terugblik'
   | 'nabespreking';
 
 export type FilmKind = 'trailer-r1' | 'trailer-r2' | 'slot-r1' | 'finale';
@@ -84,6 +85,11 @@ export interface GameUiState {
   pendingReacties: boolean;
   dilemma: DilemmaState;
   hidden: HiddenMetersState;
+  /**
+   * Verborgen meters bij start van dit deel. `null` = onbekend (oude save zonder veld).
+   * Geen richtingstekst op het teamscherm als dit ontbreekt.
+   */
+  hiddenBeginDeel: { menselijkeMaat: number; eerlijkheid: number } | null;
   /** Voortgang zichtbare/verborgen meters in interventiemotor (per aflevering) */
   interventieMeters: InterventieMeterState | null;
   /** Tijdgeest-geluid (optioneel); standaard uit */

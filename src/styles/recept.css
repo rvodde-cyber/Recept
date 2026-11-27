@@ -2530,3 +2530,52 @@ select:focus-visible {
     transition: none;
   }
 }
+
+.terugblik-panel {
+  margin-bottom: 16px;
+}
+.terugblik-fade {
+  animation: terugblik-in 0.5s ease-out;
+}
+@keyframes terugblik-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .terugblik-fade { animation: none; }
+}
+.terugblik-kaarten {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.terugblik-kaart {
+  border-top: 1px solid var(--line);
+  padding-top: 12px;
+}
+.terugblik-verborgen dt {
+  font-weight: 600;
+  margin-top: 10px;
+}
+.terugblik-verborgen dd {
+  margin: 4px 0 0;
+}
+.terugblik-uitleg {
+  margin: 20px 0;
+}
+.terugblik-disclaimer {
+  font-size: 13px;
+  text-transform: none;
+  letter-spacing: 0;
+}
+.reeks-terugblik .terugblik-panel h3 {
+  margin: 0 0 8px;
+}
+.docent-terugblik {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}

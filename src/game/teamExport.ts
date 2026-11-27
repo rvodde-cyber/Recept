@@ -4,6 +4,9 @@ import type { GameUiState, Phase } from './uiTypes';
 import type { GesprekskaartExportEntry } from '@data/schemas/gesprekskaart.schema';
 import { TEAM_EXPORT_GESPREK_VERSION } from '@data/schemas/gesprekskaart.schema';
 import { WAARDEN } from '@data/schemas/gesprekskaart.schema';
+import { computeTerugblikDeel } from './terugblik/regels';
+import { TERUGBLIK_EXPORT_VERSION } from './terugblik/config';
+import type { TerugblikDeelResult } from './terugblik/types';
 
 export type TeamExportRound = {
   round: number;
@@ -44,6 +47,7 @@ export type TeamExport = {
   gok: GameUiState['gok'];
   gesprekskaarten: GesprekskaartExportEntry[];
   hulpvraag?: { id: string; getoond: boolean };
+  terugblik?: { version: number; delen: TerugblikDeelResult[] };
 };
 
 /** Oude of nieuwe export-ronde — zonder crash bij ontbrekende velden. */
@@ -90,6 +94,8 @@ export function buildTeamExport(state: GameUiState): TeamExport {
     });
   }
 
+  const terugblikDeel = computeTerugblikDeel(state);
+
   return {
     exportVersion: TEAM_EXPORT_GESPREK_VERSION,
     exportedAt: new Date().toISOString(),
@@ -109,7 +115,19 @@ export function buildTeamExport(state: GameUiState): TeamExport {
     gok: state.gok,
     gesprekskaarten: state.gesprekskaarten,
     ...(state.hulpvraag?.getoond ? { hulpvraag: state.hulpvraag } : {}),
+    terugblik: {
+      version: TERUGBLIK_EXPORT_VERSION,
+      delen: [terugblikDeel],
+    },
   };
+}
+
+/** Oude export zonder terugblik-sectie. */
+export function normalizeTerugblikFromImport(raw: unknown): TeamExport['terugblik'] | undefined {
+  if (!raw || typeof raw !== 'object') return undefined;
+  const t = raw as TeamExport['terugblik'];
+  if (!t?.delen || !Array.isArray(t.delen)) return undefined;
+  return t;
 }
 
 export function waardeLabels(ids: string[]): string[] {

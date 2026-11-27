@@ -12,6 +12,8 @@ type Props = {
   name: string;
   hasSave: boolean;
   savedEpisode?: GameUiState['episode'];
+  showReeksTerugblik?: boolean;
+  onReeksTerugblik?: () => void;
   onName: (n: string) => void;
   dispatch: (a: GameAction) => void;
   onStart: () => void;
@@ -26,6 +28,8 @@ export function HomeScreen({
   dispatch,
   onStart,
   onResume,
+  showReeksTerugblik,
+  onReeksTerugblik,
 }: Props) {
   const { openHowto, openGloss, openSettings, openUitlegPage } = useUiModals();
   const nameOk = name.trim().length >= 2;
@@ -162,6 +166,11 @@ export function HomeScreen({
 
         <footer className="landing-foot">
           <p className="landing-foot__line">VAN GORP DRONES / VOSSENBERG, TILBURG / 2026</p>
+          {showReeksTerugblik && onReeksTerugblik ? (
+            <button type="button" className="btn ghost" onClick={onReeksTerugblik}>
+              Terugblik op alle delen
+            </button>
+          ) : null}
           <button type="button" className="btn ghost landing-uitleg-btn" onClick={openUitlegPage}>
             Uitleg en spelregels
           </button>

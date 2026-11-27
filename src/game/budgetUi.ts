@@ -113,6 +113,7 @@ export function freshEpisode(episode: EpisodeId): GameUiState {
     pendingReacties: false,
     dilemma: { choice: null, text: '', done: false },
     hidden: freshHidden(),
+    hiddenBeginDeel: { menselijkeMaat: 50, eerlijkheid: 50 },
     interventieMeters: usesInterventieMotor(episode)
       ? initialInterventieMeters(episode as Exclude<EpisodeId, 4>)
       : null,

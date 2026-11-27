@@ -28,6 +28,7 @@ import { validateGesprekOpslaan, type GesprekskaartExportEntry } from '@data/sch
 import { gesprekskaartVoor } from '@data/gesprekskaarten';
 import { hulpvraagVoor } from '@content/hulpvraag.nl';
 import { moetAfleveringstrailer } from './episodeTrailerFlow';
+import { loadTerugblikActief } from '../lib/terugblikSettings';
 import type { GameUiState, Phase } from './uiTypes';
 import type { FilmKind } from './uiTypes';
 
@@ -75,7 +76,8 @@ export type GameAction =
   | { type: 'TICK' }
   | { type: 'ADJUST_TIMER'; delta: number }
   | { type: 'SET_TIMER_ON'; on: boolean }
-  | { type: 'HULPVRAAG_GETOOND' };
+  | { type: 'HULPVRAAG_GETOOND' }
+  | { type: 'TERUGBLIK_VERDER' };
 
 function roundState(state: GameUiState) {
   return state.rounds[state.round];
@@ -112,11 +114,13 @@ export function gameReducer(state: GameUiState, action: GameAction): GameUiState
     case 'START_EPISODE': {
       const trailerGezien = state.trailerGezien ?? {};
       const phase: Phase = moetAfleveringstrailer(action.episode, trailerGezien, true) ? 'trailer' : 'intro';
+      const hiddenBegin = { menselijkeMaat: 50, eerlijkheid: 50 };
       return {
         ...freshEpisode(action.episode),
         playerName: state.playerName,
         team: state.team,
         trailerGezien,
+        hiddenBeginDeel: hiddenBegin,
         phase,
       };
     }
@@ -509,10 +513,16 @@ export function gameReducer(state: GameUiState, action: GameAction): GameUiState
           next = { ...next, phase: 'tussen' };
         }
       } else if (kind === 'finale') {
-        next = { ...next, phase: 'voorspel' };
+        next = {
+          ...next,
+          phase: loadTerugblikActief() ? 'terugblik' : 'voorspel',
+        };
       }
       return next;
     }
+    case 'TERUGBLIK_VERDER':
+      if (state.phase !== 'terugblik') return state;
+      return { ...state, phase: 'voorspel' };
     case 'START_ROUND_2': {
       const delivered: Record<string, true> = {};
       for (const [k, v] of Object.entries(state.deliveredPhases)) {

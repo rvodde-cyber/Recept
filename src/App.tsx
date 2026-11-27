@@ -6,6 +6,8 @@ import { episodeMeta } from '@data/episodes/meta';
 import type { GameAction } from './game/gameReducer';
 import { GameShell } from './screens/GameShell';
 import { HomeScreen } from './screens/HomeScreen';
+import { ReeksTerugblikScreen } from './screens/ReeksTerugblikScreen';
+import { heeftAfgeslotenDeel } from './game/terugblik/opslag';
 import { UitlegScreen } from './screens/UitlegScreen';
 import { PosterTypographyScope } from './components/PosterTypographyScope';
 import type { UitlegOrigin } from './context/UiModalsContext';
@@ -38,6 +40,7 @@ export default function App() {
   const [playing, setPlaying] = useState(false);
   const [draftName, setDraftName] = useState(state.playerName);
   const [uitlegFrom, setUitlegFrom] = useState<UitlegOrigin | null>(null);
+  const [reeksTerugblik, setReeksTerugblik] = useState(false);
 
   const dispatchGame = (action: GameAction) => {
     dispatch(action);
@@ -47,11 +50,13 @@ export default function App() {
     }
   };
 
-  const viewKey = uitlegFrom
-    ? `uitleg:${uitlegFrom}`
-    : !playing
-      ? 'home'
-      : `game:${state.episode}:${state.round}:${state.phase}`;
+  const viewKey = reeksTerugblik
+    ? 'reeks-terugblik'
+    : uitlegFrom
+      ? `uitleg:${uitlegFrom}`
+      : !playing
+        ? 'home'
+        : `game:${state.episode}:${state.round}:${state.phase}`;
 
   return (
     <UiModalsProvider
@@ -69,12 +74,18 @@ export default function App() {
             onToGame={uitlegFrom === 'game' ? () => setUitlegFrom(null) : undefined}
           />
         </PosterTypographyScope>
+      ) : reeksTerugblik ? (
+        <PosterTypographyScope className="landing-typography">
+          <ReeksTerugblikScreen onTerug={() => setReeksTerugblik(false)} />
+        </PosterTypographyScope>
       ) : !playing ? (
         <PosterTypographyScope className="landing-typography">
           <HomeScreen
             name={draftName}
             hasSave={hasSave}
             savedEpisode={state.playerName ? state.episode : undefined}
+            showReeksTerugblik={heeftAfgeslotenDeel()}
+            onReeksTerugblik={() => setReeksTerugblik(true)}
             onName={setDraftName}
             dispatch={dispatchGame}
             onStart={() => setPlaying(true)}
@@ -86,7 +97,14 @@ export default function App() {
         </PosterTypographyScope>
       ) : (
         <PeriodTypographyScope periodKey={episodeMeta(state.episode).periodKey}>
-          <GameShell state={state} dispatch={dispatchGame} />
+          <GameShell
+            state={state}
+            dispatch={dispatchGame}
+            onReeksTerugblik={() => {
+              setPlaying(false);
+              setReeksTerugblik(true);
+            }}
+          />
         </PeriodTypographyScope>
       )}
     </UiModalsProvider>

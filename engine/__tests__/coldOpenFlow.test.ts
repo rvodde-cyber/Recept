@@ -164,10 +164,17 @@ describe('flow reducer — geen dode eindes A1 slotfilm', () => {
     expect(s.phase).toBe('tussen');
   });
 
-  it('END_FILM finale gaat naar voorspel', () => {
+  it('END_FILM finale gaat naar terugblik', () => {
     let s = freshEpisode(1);
     s = { ...s, phase: 'uitkomst', filmKind: 'finale' };
     s = gameReducer(s, { type: 'END_FILM' });
+    expect(s.phase).toBe('terugblik');
+  });
+
+  it('TERUGBLIK_VERDER gaat naar voorspel', () => {
+    let s = freshEpisode(1);
+    s = { ...s, phase: 'terugblik' };
+    s = gameReducer(s, { type: 'TERUGBLIK_VERDER' });
     expect(s.phase).toBe('voorspel');
   });
 });

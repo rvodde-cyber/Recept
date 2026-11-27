@@ -4,6 +4,13 @@ import { gesprekskaartVoor } from '@data/gesprekskaarten';
 import type { GameAction } from '../game/gameReducer';
 import type { GameUiState, Phase } from '../game/uiTypes';
 import { loadHulpvraagTonen, saveHulpvraagTonen } from '../lib/onderwijsSettings';
+import {
+  loadTerugblikActief,
+  loadTerugblikZichtbaarVoorTeams,
+  saveTerugblikActief,
+  saveTerugblikZichtbaarVoorTeams,
+} from '../lib/terugblikSettings';
+import { DocentTerugblikBlock } from './DocentTerugblikBlock';
 import { useState } from 'react';
 
 const PHASES: { id: Phase; label: string }[] = [
@@ -17,6 +24,7 @@ const PHASES: { id: Phase; label: string }[] = [
   { id: 'scan', label: 'Scan' },
   { id: 'uitkomst', label: 'Uitkomst' },
   { id: 'tussen', label: 'Tussen' },
+  { id: 'terugblik', label: 'Terugblik' },
   { id: 'voorspel', label: 'Voorspel' },
   { id: 'opvolging', label: 'Opvolging' },
   { id: 'pauze', label: 'Pauze' },
@@ -32,6 +40,8 @@ type Props = {
 export function DocentPausePanel({ state, dispatch }: Props) {
   const docent = useDocentMode();
   const [hulpvraagTonen, setHulpvraagTonen] = useState(() => loadHulpvraagTonen());
+  const [terugblikZichtbaar, setTerugblikZichtbaar] = useState(() => loadTerugblikZichtbaarVoorTeams());
+  const [terugblikActief, setTerugblikActief] = useState(() => loadTerugblikActief());
   if (!docent) return null;
 
   const h = state.hidden;
@@ -51,6 +61,30 @@ export function DocentPausePanel({ state, dispatch }: Props) {
           {state.timerOn ? 'Timer pauzeren' : 'Timer hervatten'}
         </button>
       </div>
+      <label className="docent-row">
+        <span>Terugblik fase actief</span>
+        <input
+          type="checkbox"
+          checked={terugblikActief}
+          onChange={(e) => {
+            const on = e.target.checked;
+            setTerugblikActief(on);
+            saveTerugblikActief(on);
+          }}
+        />
+      </label>
+      <label className="docent-row">
+        <span>Terugblik zichtbaar voor teams</span>
+        <input
+          type="checkbox"
+          checked={terugblikZichtbaar}
+          onChange={(e) => {
+            const on = e.target.checked;
+            setTerugblikZichtbaar(on);
+            saveTerugblikZichtbaarVoorTeams(on);
+          }}
+        />
+      </label>
       <label className="docent-row">
         <span>Onderwijsversie: hulpvraagkaart tonen</span>
         <input
@@ -168,6 +202,7 @@ export function DocentPausePanel({ state, dispatch }: Props) {
           </table>
         </div>
       ) : null}
+      <DocentTerugblikBlock state={state} />
       <button type="button" className="btn" onClick={() => downloadTeamExport(state)}>
         Exporteer keuzeketen (JSON)
       </button>

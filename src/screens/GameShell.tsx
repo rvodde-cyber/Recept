@@ -41,6 +41,7 @@ import { NabesprekingPhase } from './phases/NabesprekingPhase';
 import { GesprekskaartPhase } from './phases/GesprekskaartPhase';
 import { VoorspelPhase } from './phases/VoorspelPhase';
 import { HulpvraagPhase } from './phases/HulpvraagPhase';
+import { TerugblikPhase } from './phases/TerugblikPhase';
 
 function Ticker({ state }: { state: GameUiState }) {
   const roundDef = roundDefFor(state);
@@ -71,7 +72,15 @@ function FilmLayer({ state, dispatch }: { state: GameUiState; dispatch: (a: Game
   );
 }
 
-export function GameShell({ state, dispatch }: { state: GameUiState; dispatch: (a: GameAction) => void }) {
+export function GameShell({
+  state,
+  dispatch,
+  onReeksTerugblik,
+}: {
+  state: GameUiState;
+  dispatch: (a: GameAction) => void;
+  onReeksTerugblik?: () => void;
+}) {
   const { phase, round } = state;
   const { openPause } = useUiModals();
   useMessageDelivery(state, dispatch);
@@ -175,6 +184,15 @@ export function GameShell({ state, dispatch }: { state: GameUiState; dispatch: (
       <>
         <SyncModalRound round={round} />
         <GesprekskaartPhase state={state} dispatch={dispatch} />
+        {film}
+        <MessageToastHost />
+      </>
+    );
+  }
+  if (phase === 'terugblik') {
+    return (
+      <>
+        <TerugblikPhase state={state} dispatch={dispatch} onReeksTerugblik={onReeksTerugblik} />
         {film}
         <MessageToastHost />
       </>

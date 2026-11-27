@@ -15,6 +15,7 @@ import { gesprekskaartVoor } from '@data/gesprekskaarten';
 import { roundDefFor } from '../../game/roundSource';
 import type { GameAction } from '../../game/gameReducer';
 import type { GameUiState } from '../../game/uiTypes';
+import { DocentTerugblikBlock } from '../../components/DocentTerugblikBlock';
 
 export function NabesprekingPhase({ state, dispatch }: { state: GameUiState; dispatch: (a: GameAction) => void }) {
   const docent = useDocentMode();
@@ -39,9 +40,12 @@ export function NabesprekingPhase({ state, dispatch }: { state: GameUiState; dis
           keuzes als spiegel, niet als wedstrijd.
         </p>
         {docent ? (
-          <button type="button" className="btn ghost" onClick={() => downloadTeamExport(state)}>
-            Exporteer keuzeketen (JSON)
-          </button>
+          <>
+            <button type="button" className="btn ghost" onClick={() => downloadTeamExport(state)}>
+              Exporteer keuzeketen (JSON)
+            </button>
+            <DocentTerugblikBlock state={state} />
+          </>
         ) : null}
       </section>
 

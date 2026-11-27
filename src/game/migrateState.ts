@@ -77,5 +77,15 @@ export function migrateGameState(raw: unknown): GameUiState | null {
     gok: s.gok ?? null,
     gesprekskaarten: s.gesprekskaarten ?? [],
     hulpvraag: s.hulpvraag ?? null,
+    hiddenBeginDeel:
+      s.hiddenBeginDeel != null &&
+      typeof s.hiddenBeginDeel === 'object' &&
+      typeof s.hiddenBeginDeel.menselijkeMaat === 'number' &&
+      typeof s.hiddenBeginDeel.eerlijkheid === 'number'
+        ? {
+            menselijkeMaat: s.hiddenBeginDeel.menselijkeMaat,
+            eerlijkheid: s.hiddenBeginDeel.eerlijkheid,
+          }
+        : null,
   };
 }
