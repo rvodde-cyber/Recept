@@ -57,8 +57,8 @@ Mapping legacy P1–P18 (ontwerp 4:5) → nieuwe codes waar van toepassing:
 | P-GERRIT-1996 | Gerrit Smulders | 2 | 1996 | 56 | Ploegbaas | niet vastgelegd | Wie is wie, cold open, slotfilm | 1 | `docs/serieconcept.md`, `content/intros.nl.ts` |
 | P-JOOST-1996 | Joost Hendriks | 2 | 1996 | 22* | Werknemer / OR-start | niet vastgelegd | Wie is wie, cold open r2 | 1 | `data/personen.ts`*, `coldOpenEp2.ts` |
 | P-SANNE-2009 | Sanne van Gorp | 3 | 2009 | 32 | Kandidaat-opvolger | niet vastgelegd | Wie is wie, cold open, intro | 1 | `content/intros.nl.ts`, `docs/serieconcept.md` |
-| P-MARCO-2009 | Marco van Gorp | 3 | 2009 | 29 | Kandidaat-opvolger | niet vastgelegd | Wie is wie, cold open | 1 | `docs/serieconcept.md`, `data/personen.ts` |
-| P-MARCO-2026 | Marco van Gorp | 4 | 2026 | 46 | Directeur | niet vastgelegd | Wie is wie, berichten | 1 | `CURSOR-PROMPT.md` §8.2, `data/personen.ts` |
+| P-MARCO-2009 | Marco van Gorp | 3 | 2009 | 30 | Kandidaat-opvolger | niet vastgelegd | Wie is wie, cold open | 1 | `docs/serieconcept.md`, `data/personen.ts` |
+| P-MARCO-2026 | Marco van Gorp | 4 | 2026 | 47 | Directeur | niet vastgelegd | Wie is wie, berichten | 1 | `CURSOR-PROMPT.md` §8.2, `data/personen.ts` |
 | P-MARCO-2036 | Marco van Gorp | 5 | 2036 | 56 | Directeur | niet vastgelegd | Wie is wie, cold open | 1 | `docs/serieconcept.md`, `coldOpenEp5.ts` |
 | P-ANS-2026 | Ans Willems | 4 | 2026 | 57 | Ploegleider | niet vastgelegd | Wie is wie, berichten | 1 | `data/personen.ts`, `data/berichten.ts` |
 | P-ERIK-2026 | Erik Verhoeven | 4 | 2026 | 49 | Adviseur Optivora | nette blazer (prompt); geen schurkbeeld | Wie is wie, berichten | 1 | `docs/PORTRETTEN-PROMPTS.md`, `data/personen.ts` |
@@ -93,7 +93,7 @@ Geen portretten voor: **Ingrid, Truus, Saskia, Mark, Ria, Sanaa** (alleen gespre
 | Lies van Gorp | 27 | 39 | 52 | 69 | 79 |
 | Gerrit Smulders | 44 | 56 | † | – | – |
 | Sanne van Gorp | 7 | 19 | 32 | 49 | 59 |
-| Marco van Gorp | 4 | 16 | 29 | 46 | 56 |
+| Marco van Gorp | 5 | 17 | 30 | 47 | 57 |
 | Erik Verhoeven | – | – | 32 | 49 | 59 |
 | Ans Willems | – | 27 | 40 | 57 | 67 |
 | Joost Hendriks | – | 22* | 35 | 52 | 62 |
@@ -111,7 +111,7 @@ Bron leeftijden: `docs/serieconcept.md` (leidend), aangevuld met speelbare tekst
 | --- | --- | --- | --- |
 | Harrie 2009 | **54** in `content/intros.nl.ts`, `data/personen.ts` | **54** in `docs/serieconcept.md` | consistent |
 | Harrie 2009 | Oud ontwerp `recept-houtskoolschets` noemde **66** | – | **verouderd**; volg 54 |
-| Marco 2009 | intro: „net **dertig**”; data: **29** | serieconcept **29** | intro vs. leeftijd: tekst laat „dertig” staan |
+| Marco 2009/2026 | data **30** / **47** | intro „net dertig”; serieconcept **30** / **47** (geb. 1979) | **opgelost** nov 2026 |
 | Sanne 2026 | serieconcept **49** | geen A4-glossariumtegel | alleen narratief |
 | Ans 1996 | legacy **P11 = 27** | serieconcept **27** | P2-portret nog niet in UI-lijst |
 | Joost 1996 | data **22** (afgeleid uit geboortejaar) | serieconcept **–** in 1996 | leeftijd niet letterlijk in cold open |

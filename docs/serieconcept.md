@@ -40,7 +40,7 @@ Elke aflevering is een groeifase van Greiner (1972, 1998), met een tijdsprong er
 | Harrie van Gorp (1955), oprichter | 29, bakt worstenbroodjes in de schuur | 41, directeur-eigenaar, kent nog iedereen | 54, kiest zijn opvolger | 71, president-commissaris | Overleden in 2031; zijn testament opent de aflevering |
 | Lies van Gorp (1957), medeoprichter | 27, doet de boeken en de klanten | 39, haar rol verdwijnt uit beeld | 52, ziet de opvolgingskeuze met lede ogen aan | 69, stille getuige | 79, erflater met de beslissende stem |
 | Sanne van Gorp (1977), dochter | 7, speelt in de schuur | 19, werkt mee in de fabriek, kent elk proces | 32, de sterkste kandidaat | 49, buiten het bedrijf, getrouwd met Erik | 59, erfgename met een rekening te vereffenen |
-| Marco van Gorp (1980), zoon | 4, wil aandacht van zijn vader | 16, schaamt zich voor de worstenbroodjes | 29, kandidaat-opvolger | 46, algemeen directeur | 56, onder druk van erfgenamen en investeerder |
+| Marco van Gorp (1979), zoon | 5, wil aandacht van zijn vader | 17, schaamt zich voor de worstenbroodjes | 30, kandidaat-opvolger | 47, algemeen directeur | 57, onder druk van erfgenamen en investeerder |
 | Erik Verhoeven (1977), zwager | – | – | 32, trouwt met Sanne | 49, eigenaar Optivora | 59, adviseur van Sanne in de erfenisstrijd |
 | Gerrit Smulders (1940), eerste werknemer | 44, slager, kent het recept | 56, ploegbaas, gaat met pensioen | Overleden; zijn handschrift staat in het schrift | – | – |
 | Ans Willems (1969) | – | 27, nieuw aan de bakstraat | 40, ervaren kracht | 57, uitgeputte ploegleider | 67, net met pensioen; laatste die het recept nog kent |

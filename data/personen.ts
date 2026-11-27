@@ -106,25 +106,25 @@ export const PERSONEN: Persoon[] = [
   {
     slug: 'marco-van-gorp',
     naam: 'Marco van Gorp',
-    leeftijd: 46,
+    leeftijd: 47,
     rol: 'Directeur',
     tekst: 'Harries zoon en jullie neef. Hij stelde de begroting op en wil vrijdag een plan zien.',
     portretAlt: 'Portret van Marco van Gorp, directeur',
     afleveringen: {
       3: {
-        leeftijd: 29,
+        leeftijd: 30,
         rol: 'Zoon, kandidaat-opvolger',
         tekst: 'Harries zoon, net dertig. Hij komt met een gloednieuw pak en een stem die nooit twijfelt.',
         portret: 'P-MARCO-2009',
       },
       4: {
-        leeftijd: 46,
+        leeftijd: 47,
         rol: 'Directeur',
         tekst: 'Harries zoon en jullie neef. Hij stelde de begroting op en wil vrijdag een plan zien.',
         portret: 'P-MARCO-2026',
       },
       5: {
-        leeftijd: 56,
+        leeftijd: 57,
         rol: 'Directeur onder druk',
         tekst: 'Onder druk van erfgenamen en investeerders; het bod van Optivora ligt op tafel.',
         portret: 'P-MARCO-2036',

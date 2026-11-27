@@ -1,9 +1,13 @@
 # Voortgang Recept
 
-Laatst bijgewerkt: **25 november 2026** (branch `feat/recept-a1`, dubbele lensberichten cold open).
+Laatst bijgewerkt: **27 november 2026** (branch `feat/recept-a1`, restpunten opmerkingenbundel).
 
 ## Afgerond in deze sessie
 
+- **Stap 1:** gesprekskaart A3 en A4 r2 `hintRonde2` gecontroleerd — al conform spec (`data/gesprekskaarten.ts`, `content/intros.nl.ts`).
+- **Stap 2:** Marco 30/47/57 in `data/personen.ts`; serieconcept + `docs/PORTRETTEN-LIJST.md`; Harrie 54 in 2009 al overal (geen code-66). Test `engine/__tests__/personenLeeftijd.test.ts`.
+- **Stap 3:** spelersteksten op rolverdeling gecontroleerd — geen wijzigingen nodig.
+- **Stap 4:** lijst orakeltoon aangevuld in `docs/OPEN-VRAGEN.md` (§ Orakeltoon).
 - **Cold open A5:** dubbele lensberichten voorkomen via dedupe in `buildColdTimeline` + render-stack; test `engine/__tests__/coldOpenDuplicates.test.ts`; data A5 r1 heeft elk bericht één keer.
 - **Controle (geen codewijziging):** A1 alinea 2 + gk1-alt conform spec in `data/gesprekskaarten.ts`; scroll bovenaan via centrale `ViewReset` / `viewKey` in `App.tsx`, test `src/lib/scrollToTop.test.tsx` (`scrollTo` top 0). Tests + build groen.
 - **Controle eerdere pass:** beeld-CSS zonder max-height; zie regels hieronder.
